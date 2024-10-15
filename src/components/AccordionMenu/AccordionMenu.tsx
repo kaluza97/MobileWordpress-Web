@@ -53,7 +53,7 @@ export const AccordionMenu = ({ title, addButton, menuItems, setMenuItems }: Acc
                             size='small'
                         />
                         <Button variant="contained" startIcon={<AddIcon />} onClick={handleAddItem} disabled={!newItem} sx={addButtonStyles}>
-                            Add new item
+                            Add
                         </Button>
                     </Box>
                 }

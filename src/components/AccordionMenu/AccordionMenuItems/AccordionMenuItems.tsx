@@ -45,8 +45,14 @@ export const AccordionMenuItems = ({ addButton, menuItems, setMenuItems }: Accor
     }
 
 
-    const toggleEditMode = (id: string) => {
-        editMode ? setEditMode(null) : setEditMode(id);
+    const toggleEditMode = (id: string, name: string) => {
+        if (editMode) {
+            setEditMode(null)
+        }
+        else {
+            setEditMode(id);
+            setEditedItem(name)
+        }
     }
 
 
@@ -61,9 +67,9 @@ export const AccordionMenuItems = ({ addButton, menuItems, setMenuItems }: Accor
 
     return (
         <>
-            {menuItems.map((item) => (
-                <Box key={item._id} sx={container}>
-                    {editMode === item._id ?
+            {menuItems.map(({ _id, name }) => (
+                <Box key={_id} sx={container}>
+                    {editMode === _id ?
                         <TextField
                             sx={textField}
                             value={editedItem}
@@ -73,13 +79,13 @@ export const AccordionMenuItems = ({ addButton, menuItems, setMenuItems }: Accor
                             size="small"
                         />
                         :
-                        <Typography sx={text}>{item.name}</Typography>
+                        <Typography sx={text}>{name}</Typography>
                     }
                     {addButton &&
                         <>
-                            {editMode === item._id ?
+                            {editMode === _id ?
                                 <Box sx={iconContainer}>
-                                    <IconButton onClick={() => handleSaveEdit(item._id)} disabled={!editedItem}>
+                                    <IconButton onClick={() => handleSaveEdit(_id)} disabled={!editedItem}>
                                         <CheckIcon />
                                     </IconButton>
                                     <IconButton onClick={cancelEditMode}>
@@ -87,12 +93,11 @@ export const AccordionMenuItems = ({ addButton, menuItems, setMenuItems }: Accor
                                     </IconButton>
                                 </Box>
                                 :
-
                                 <Box sx={iconContainer}>
-                                    <IconButton onClick={() => toggleEditMode(item._id)}>
+                                    <IconButton onClick={() => toggleEditMode(_id, name)}>
                                         <EditIcon />
                                     </IconButton>
-                                    <IconButton onClick={() => handleRemoveItem(item._id)}>
+                                    <IconButton onClick={() => handleRemoveItem(_id)}>
                                         <DeleteIcon />
                                     </IconButton>
                                 </Box>

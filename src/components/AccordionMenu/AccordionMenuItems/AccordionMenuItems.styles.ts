@@ -16,5 +16,6 @@ export const text: SxProps = {
 }
 
 export const iconContainer: SxProps = {
+    display: 'flex',
     marginLeft: '1rem'
 }
