@@ -1,10 +1,14 @@
 "use client"
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material';
-import { container } from './SettingsMenu.styles';
+import { container } from '@/components/SettingsMenu/SettingsMenu.styles';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
+import { useContext } from 'react';
+import { BottomNavigationSettings } from './BottomNavigationSettings/BottomNavigationSettings';
 
 
 export const SettingsMenu = () => {
+    const { isSettingsActive } = useContext(SettingsMenuContext);
 
     return (
         <Box sx={container}>
@@ -15,6 +19,9 @@ export const SettingsMenu = () => {
                     <Typography>Settings</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
+                    {isSettingsActive ?
+                        <BottomNavigationSettings /> : <Typography>Inactive settings</Typography>
+                    }
                 </AccordionDetails>
             </Accordion>
         </Box>

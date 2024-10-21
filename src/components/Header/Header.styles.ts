@@ -1,7 +1,8 @@
+import { Colors } from '@/variables/Colors';
 import { SxProps } from '@mui/material';
 
 export const appBar: SxProps = {
-    backgroundColor: '#D0E4EE',
+    backgroundColor: Colors.main,
 };
 
 export const container: SxProps = {

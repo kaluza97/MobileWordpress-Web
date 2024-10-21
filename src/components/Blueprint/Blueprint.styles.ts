@@ -1,3 +1,4 @@
+import { Colors } from "@/variables/Colors";
 import { SxProps } from "@mui/material";
 
 export const container: SxProps = {
@@ -7,6 +8,7 @@ export const container: SxProps = {
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 100
 };
 
 export const phoneContainer: SxProps = {
@@ -37,20 +39,19 @@ const phoneSection: SxProps = {
 export const header: SxProps = {
     ...phoneSection,
     height: '10%',
-    backgroundColor: 'green',
+    backgroundColor: Colors.green,
     borderRadius: '25px 25px 0 0'
 };
 
 export const content: SxProps = {
     ...phoneSection,
     height: '80%',
-    backgroundColor: 'orange',
+    backgroundColor: Colors.orange,
     overflowY: 'auto',
 };
 
 export const footer: SxProps = {
     ...phoneSection,
     height: '10%',
-    backgroundColor: 'DodgerBlue',
     borderRadius: '0 0 25px 25px'
 };

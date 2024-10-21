@@ -2,7 +2,7 @@
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Image from 'next/image';
-import { appBar, container, text } from './Header.styles';
+import { appBar, container, text } from '@/components/Header/Header.styles';
 import { Typography } from '@mui/material';
 
 

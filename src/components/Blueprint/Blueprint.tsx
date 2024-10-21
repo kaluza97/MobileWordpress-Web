@@ -1,12 +1,24 @@
 "use client"
 import { Box } from "@mui/material";
 import { CardMedia } from '@mui/material';
-import { container, content, footer, header, phoneContainer, phoneContent } from "./Blueprint.styles";
+import { container, content, footer, header, phoneContainer, phoneContent } from "@/components/Blueprint/Blueprint.styles";
+import { Droppable } from "@/components/DragAndDrop/Droppable/Droppable";
 import Smartphone from "/public/phone.png";
 import Image from 'next/image';
+import { useContext } from "react";
+import { SettingsMenuContext } from "@/context/SettingsMenu/SettingsMenu";
+
+interface BlueprintInterface {
+    droppedItemName: string;
+}
+
+export const Blueprint = ({ droppedItemName }: BlueprintInterface) => {
+    const { setIsSettingsActive } = useContext(SettingsMenuContext);
 
 
-export const Blueprint = () => {
+    const handleActiveSetting = () => {
+        setIsSettingsActive(true)
+    }
 
     return (
         <CardMedia image="/blueprint.jpg" sx={container}>
@@ -22,7 +34,12 @@ export const Blueprint = () => {
                     <Box sx={header}>Header</Box>
                     <Box sx={content}>Content
                     </Box>
-                    <Box sx={footer}>Footer</Box>
+                    <Box sx={footer}>
+                        <Droppable item={droppedItemName}>
+                            <button onClick={handleActiveSetting}>{droppedItemName}</button>
+                        </Droppable>
+                    </Box>
+
                 </Box>
             </Box>
         </CardMedia>
