@@ -20,7 +20,7 @@ export const SettingsMenu = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                     {isSettingsActive ?
-                        <BottomNavigationSettings /> : <Typography>Inactive settings</Typography>
+                        <BottomNavigationSettings /> : <Typography>Inactive settings. Please choose one of the "Components" and drag to phone section.</Typography>
                     }
                 </AccordionDetails>
             </Accordion>
