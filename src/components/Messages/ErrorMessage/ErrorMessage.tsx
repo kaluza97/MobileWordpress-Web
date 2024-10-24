@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Alert } from '@mui/material';
-import { ErrorMessageContext } from '@/context/ErrorMessage/ErrorMessage';
+import { ErrorMessageContext } from '@/context/Messages/ErrorMessage/ErrorMessage';
 
 export const ErrorMessage = () => {
   const { errorMessage, setErrorMessage } = useContext(ErrorMessageContext);
@@ -12,7 +12,7 @@ export const ErrorMessage = () => {
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [errorMessage, setErrorMessage]);
+  }, [errorMessage]);
 
   const handleClose = () => setErrorMessage('');
 

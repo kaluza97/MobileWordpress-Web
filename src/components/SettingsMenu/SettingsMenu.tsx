@@ -10,7 +10,7 @@ import { container } from '@/components/SettingsMenu/SettingsMenu.styles';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 import { useContext } from 'react';
-import { BottomNavigationSettings } from './BottomNavigationSettings/BottomNavigationSettings';
+import { BottomNavigation } from '@/components/SettingsMenu/BottomNavigation/BottomNavigation';
 
 export const SettingsMenu = () => {
   const { isSettingsActive } = useContext(SettingsMenuContext);
@@ -24,17 +24,18 @@ export const SettingsMenu = () => {
 
   return (
     <Box sx={container}>
-      <Accordion>
+      <Accordion defaultExpanded={true}>
         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
           <Typography>Settings</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {isSettingsActive ? (
-            <BottomNavigationSettings SettingsSections={SettingsSections} />
+            <BottomNavigation SettingsSections={SettingsSections} />
           ) : (
             <Typography>
               Inactive settings. Please choose one of the "Components" and drag
-              to phone section.
+              to phone section. After dragging the appropriate section, click on
+              it to open the Settings menu
             </Typography>
           )}
         </AccordionDetails>

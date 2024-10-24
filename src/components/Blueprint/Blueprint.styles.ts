@@ -55,7 +55,3 @@ export const footer: SxProps = {
   height: '10%',
   borderRadius: '0 0 25px 25px',
 };
-
-export const clickableText: SxProps = {
-  cursor: 'pointer',
-};

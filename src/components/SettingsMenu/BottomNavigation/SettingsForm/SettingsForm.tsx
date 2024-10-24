@@ -1,6 +1,7 @@
 'use client';
 import {
   Box,
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -14,15 +15,21 @@ import { ChangeEvent, useContext, useState } from 'react';
 import { AccordionContext } from '@/context/AccordionMenu/AccordionMenu';
 import { bottomNavigationIcons } from '@/constants/BottomNavigationIcons';
 import {
+  checkButtonStyles,
   container,
   selectContainer,
-} from '@/components/SettingsMenu/BottomNavigationSettings/SettingsForm/SettingsForm.styles';
+} from '@/components/SettingsMenu/BottomNavigation/SettingsForm/SettingsForm.styles';
+import CheckIcon from '@mui/icons-material/Check';
+import { SuccessMessageContext } from '@/context/Messages/SuccessMessage/SuccessMessage';
 
 export const SettingsForm = () => {
   const [newItemName, setNewItemName] = useState('');
   const [newItemIcon, setNewItemIcon] = useState('');
   const [newItemView, setNewItemView] = useState('');
   const { views } = useContext(AccordionContext);
+  const { setSuccessMessage } = useContext(SuccessMessageContext);
+  const saveButtonIsActive =
+    newItemName !== '' && newItemIcon !== '' && newItemView !== '';
 
   const onNewItemNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewItemName(event.target.value);
@@ -34,6 +41,10 @@ export const SettingsForm = () => {
 
   const selectView = (event: SelectChangeEvent) => {
     setNewItemView(event.target.value);
+  };
+
+  const handleConfirm = () => {
+    setSuccessMessage('Item saved correctly.');
   };
 
   return (
@@ -82,6 +93,15 @@ export const SettingsForm = () => {
             </MenuItem>
           ))}
         </Select>
+        <Button
+          variant="contained"
+          startIcon={<CheckIcon />}
+          onClick={handleConfirm}
+          sx={checkButtonStyles}
+          disabled={!saveButtonIsActive}
+        >
+          Confirm
+        </Button>
       </FormControl>
     </Box>
   );

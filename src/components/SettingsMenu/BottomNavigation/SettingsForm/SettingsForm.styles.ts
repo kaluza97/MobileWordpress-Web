@@ -12,12 +12,6 @@ export const selectContainer: SxProps = {
   justifyContent: 'center',
 };
 
-export const sectionText: SxProps = {
-  marginBottom: '1rem',
-  fontSize: '1.6rem',
-  fontWeight: 'bold',
-};
-
 export const checkButtonStyles: SxProps = {
   marginTop: '2rem',
   marginBottom: '4rem',

@@ -2,7 +2,8 @@
 import { ReactNode } from 'react';
 import { AccordionContextProvider } from '@/context/AccordionMenu/AccordionMenu';
 import { SettingsContextProvider } from '@/context/SettingsMenu/SettingsMenu';
-import { ErrorMessageContextProvider } from '@/context/ErrorMessage/ErrorMessage';
+import { ErrorMessageContextProvider } from '@/context/Messages/ErrorMessage/ErrorMessage';
+import { SuccessMessageContextProvider } from '@/context/Messages/SuccessMessage/SuccessMessage';
 
 interface AppProps {
   children: ReactNode;
@@ -10,10 +11,12 @@ interface AppProps {
 
 export default function App({ children }: AppProps) {
   return (
-    <ErrorMessageContextProvider>
-      <AccordionContextProvider>
-        <SettingsContextProvider>{children}</SettingsContextProvider>
-      </AccordionContextProvider>
-    </ErrorMessageContextProvider>
+    <SuccessMessageContextProvider>
+      <ErrorMessageContextProvider>
+        <AccordionContextProvider>
+          <SettingsContextProvider>{children}</SettingsContextProvider>
+        </AccordionContextProvider>
+      </ErrorMessageContextProvider>
+    </SuccessMessageContextProvider>
   );
 }

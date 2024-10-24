@@ -4,6 +4,7 @@ import { ErrorMessageType } from './ErrorMessage.types';
 export const ErrorMessageContext = createContext<ErrorMessageType>({
   errorMessage: '',
   setErrorMessage: () => {},
+  clearErrorMessage: () => {},
 });
 
 interface ErrorMessageContextProviderProps {
@@ -15,11 +16,16 @@ const ErrorMessageContextProvider = ({
 }: ErrorMessageContextProviderProps) => {
   const [errorMessage, setErrorMessage] = useState<string>('');
 
+  const clearErrorMessage = () => {
+    setErrorMessage('');
+  };
+
   return (
     <ErrorMessageContext.Provider
       value={{
         errorMessage,
         setErrorMessage,
+        clearErrorMessage,
       }}
     >
       {children}
