@@ -1,9 +1,8 @@
 'use client';
 import { ReactNode } from 'react';
 import { AccordionContextProvider } from '@/context/AccordionMenu/AccordionMenu';
-import { SettingsContextProvider } from '@/context/SettingsMenu/SettingsMenu';
-import { ErrorMessageContextProvider } from '@/context/Messages/ErrorMessage/ErrorMessage';
-import { SuccessMessageContextProvider } from '@/context/Messages/SuccessMessage/SuccessMessage';
+import { MessageContextProvider } from '@/context/Messages/Message';
+import { SettingsMenuContextProvider } from '@/context/SettingsMenu/SettingsMenu';
 
 interface AppProps {
   children: ReactNode;
@@ -11,12 +10,10 @@ interface AppProps {
 
 export default function App({ children }: AppProps) {
   return (
-    <SuccessMessageContextProvider>
-      <ErrorMessageContextProvider>
-        <AccordionContextProvider>
-          <SettingsContextProvider>{children}</SettingsContextProvider>
-        </AccordionContextProvider>
-      </ErrorMessageContextProvider>
-    </SuccessMessageContextProvider>
+    <MessageContextProvider>
+      <AccordionContextProvider>
+        <SettingsMenuContextProvider>{children}</SettingsMenuContextProvider>
+      </AccordionContextProvider>
+    </MessageContextProvider>
   );
 }

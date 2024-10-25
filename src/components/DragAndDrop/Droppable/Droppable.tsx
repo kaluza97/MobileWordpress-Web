@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { Box, Typography } from '@mui/material';
 import {
@@ -7,9 +7,14 @@ import {
 } from '@/components/DragAndDrop/Droppable/Droppable.styles';
 import { DroppableProps } from '@/components/DragAndDrop/Droppable/Droppable.types';
 
-export const Droppable = ({ children, item, type }: DroppableProps) => {
+export const Droppable = ({
+  children,
+  item,
+  type,
+  sectionName,
+}: DroppableProps) => {
   const { isOver, setNodeRef } = useDroppable({
-    id: 'HEADER',
+    id: 'droppable',
     data: {
       accepts: type,
     },
@@ -20,7 +25,7 @@ export const Droppable = ({ children, item, type }: DroppableProps) => {
       {item ? (
         children
       ) : (
-        <Typography>{isOver ? 'Drop Here' : 'Footer'}</Typography>
+        <Typography>{isOver ? 'Drop Here' : sectionName}</Typography>
       )}
     </Box>
   );

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import { Box } from '@mui/material';
 import { DraggableProps } from './Draggable.types';

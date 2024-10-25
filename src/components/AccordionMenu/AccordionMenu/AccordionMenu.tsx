@@ -8,6 +8,7 @@ import {
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { MenuItems } from '@/components/AccordionMenu/AccordionMenu/MenuItems/MenuItems';
 import { AccordionMenuType } from '@/components/AccordionMenu/AccordionMenu/AccordionMenu.types';
+import { titleText } from '@/components/AccordionMenu/AccordionMenu/AccordionMenu.styles';
 
 export const AccordionMenu = ({
   title,
@@ -20,7 +21,7 @@ export const AccordionMenu = ({
       aria-controls={`panel-content-${title}`}
       id={`panel-content-${title}`}
     >
-      <Typography>{title}</Typography>
+      <Typography sx={titleText}>{title}</Typography>
     </AccordionSummary>
     <AccordionDetails>
       <MenuItems

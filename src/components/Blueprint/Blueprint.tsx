@@ -13,7 +13,7 @@ import { Droppable } from '@/components/DragAndDrop/Droppable/Droppable';
 import Smartphone from '/public/phone.png';
 import Image from 'next/image';
 import { DraggableComponentType } from '../DragAndDrop/DragAndDrop.types';
-import { BottomNavigation } from './PhoneComponents/BottomNavigation';
+import { PhoneSectionOptions } from './PhoneSectionOptions/PhoneSectionOptions';
 
 interface BlueprintInterface {
   droppedItemName: string;
@@ -31,15 +31,32 @@ export const Blueprint = ({ droppedItemName }: BlueprintInterface) => {
           height={500}
         />
         <Box sx={phoneContent}>
-          <Box sx={header}>Header</Box>
-          <Box sx={content}>Content</Box>
+          <Box sx={header}>
+            <Droppable
+              sectionName="Header"
+              item={droppedItemName}
+              type={DraggableComponentType.Header}
+            >
+              <PhoneSectionOptions />
+            </Droppable>
+          </Box>
+          <Box sx={content}>
+            <Droppable
+              sectionName="Content"
+              item={droppedItemName}
+              type={DraggableComponentType.Content}
+            >
+              <PhoneSectionOptions />
+            </Droppable>
+          </Box>
 
           <Box sx={footer}>
             <Droppable
+              sectionName="Footer"
               item={droppedItemName}
               type={DraggableComponentType.BottomNavigation}
             >
-              <BottomNavigation />
+              <PhoneSectionOptions />
             </Droppable>
           </Box>
         </Box>

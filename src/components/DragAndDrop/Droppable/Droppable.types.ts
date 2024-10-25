@@ -5,4 +5,5 @@ export interface DroppableProps {
   children: ReactNode;
   item: string;
   type: DraggableComponentType;
+  sectionName: string;
 }

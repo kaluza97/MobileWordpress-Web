@@ -1,6 +1,10 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
-export interface SettingsContextType {
-    isSettingsActive: boolean;
-    setIsSettingsActive: Dispatch<SetStateAction<boolean>>;
+export interface SettingsMenuContextType {
+  isSettingsMenuActive: boolean;
+  setIsSettingsMenuActive: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface SettingsMenuContextProviderProps {
+  children: ReactNode;
 }

@@ -12,10 +12,15 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { EditableAccordionMenuType } from './EditableAccordionMenu.types';
-import { addButtonStyles } from '@/components/AccordionMenu/AccordionMenu/AccordionMenu.styles';
 import { EditableMenuItems } from '@/components/AccordionMenu/EditableAccordionMenu/EditableMenuItems/EditableMenuItems';
 import { fetchAddItem } from '@/services/fetchMenuActions';
 import { AccordionContext } from '@/context/AccordionMenu/AccordionMenu';
+import { MessageContext } from '@/context/Messages/Message';
+import { MessageType } from '@/context/Messages/Message.types';
+import {
+  addButtonStyles,
+  titleText,
+} from '@/components/AccordionMenu/EditableAccordionMenu/EditableAccordionMenu.styles';
 
 export const EditableAccordionMenu = ({
   title,
@@ -23,6 +28,7 @@ export const EditableAccordionMenu = ({
 }: EditableAccordionMenuType) => {
   const [newItem, setNewItem] = useState('');
   const { views, setViews } = useContext(AccordionContext);
+  const { setMessage } = useContext(MessageContext);
 
   const handleAddItem = async () => {
     if (newItem) {
@@ -30,7 +36,7 @@ export const EditableAccordionMenu = ({
       setViews([...views, { _id: data._id, name: data.name }]);
       setNewItem('');
     } else {
-      console.error('New item cannot be empty');
+      setMessage('New item cannot be empty', MessageType.Error);
     }
   };
 
@@ -45,7 +51,7 @@ export const EditableAccordionMenu = ({
         aria-controls={`panel-content-${title}`}
         id={`panel-content-${title}`}
       >
-        <Typography>{title}</Typography>
+        <Typography sx={titleText}>{title}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Box>

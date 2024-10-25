@@ -20,14 +20,15 @@ import {
   selectContainer,
 } from '@/components/SettingsMenu/BottomNavigation/SettingsForm/SettingsForm.styles';
 import CheckIcon from '@mui/icons-material/Check';
-import { SuccessMessageContext } from '@/context/Messages/SuccessMessage/SuccessMessage';
+import { MessageContext } from '@/context/Messages/Message';
+import { MessageType } from '@/context/Messages/Message.types';
 
 export const SettingsForm = () => {
   const [newItemName, setNewItemName] = useState('');
   const [newItemIcon, setNewItemIcon] = useState('');
   const [newItemView, setNewItemView] = useState('');
   const { views } = useContext(AccordionContext);
-  const { setSuccessMessage } = useContext(SuccessMessageContext);
+  const { setMessage } = useContext(MessageContext);
   const saveButtonIsActive =
     newItemName !== '' && newItemIcon !== '' && newItemView !== '';
 
@@ -44,7 +45,7 @@ export const SettingsForm = () => {
   };
 
   const handleConfirm = () => {
-    setSuccessMessage('Item saved correctly.');
+    setMessage('Item saved correctly.', MessageType.Success);
   };
 
   return (

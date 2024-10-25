@@ -1,25 +1,26 @@
-import React, { createContext, useState, ReactNode } from "react";
-import { SettingsContextType } from "./SettingsMenu.types";
+import React, { createContext, useState, ReactNode } from 'react';
+import {
+  SettingsMenuContextProviderProps,
+  SettingsMenuContextType,
+} from './SettingsMenu.types';
 
-
-export const SettingsMenuContext = createContext<SettingsContextType>({
-    isSettingsActive: false,
-    setIsSettingsActive: () => { }
+export const SettingsMenuContext = createContext<SettingsMenuContextType>({
+  isSettingsMenuActive: false,
+  setIsSettingsMenuActive: () => {},
 });
 
-interface SettingsContextProviderProps {
-    children: ReactNode;
-}
+const SettingsMenuContextProvider = ({
+  children,
+}: SettingsMenuContextProviderProps) => {
+  const [isSettingsMenuActive, setIsSettingsMenuActive] = useState(false);
 
-const SettingsContextProvider = ({ children }: SettingsContextProviderProps) => {
-    const [isSettingsActive, setIsSettingsActive] = useState(false);
-
-
-    return (
-        <SettingsMenuContext.Provider value={{ isSettingsActive, setIsSettingsActive }}>
-            {children}
-        </SettingsMenuContext.Provider>
-    );
+  return (
+    <SettingsMenuContext.Provider
+      value={{ isSettingsMenuActive, setIsSettingsMenuActive }}
+    >
+      {children}
+    </SettingsMenuContext.Provider>
+  );
 };
 
-export { SettingsContextProvider };
+export { SettingsMenuContextProvider };

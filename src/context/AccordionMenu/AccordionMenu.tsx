@@ -1,5 +1,8 @@
-import React, { createContext, useState, ReactNode, useEffect } from 'react';
-import { AccordionContextType } from '@/context/AccordionMenu/AccordionMenu.types';
+import React, { createContext, useState, useEffect } from 'react';
+import {
+  AccordionContextProviderProps,
+  AccordionContextType,
+} from '@/context/AccordionMenu/AccordionMenu.types';
 import { fetchViews } from '@/services/fetchViews';
 
 export const AccordionContext = createContext<AccordionContextType>({
@@ -10,10 +13,6 @@ export const AccordionContext = createContext<AccordionContextType>({
   views: [],
   setViews: () => {},
 });
-
-interface AccordionContextProviderProps {
-  children: ReactNode;
-}
 
 const AccordionContextProvider = ({
   children,
