@@ -7,7 +7,6 @@ const sharedStylesOfContainer: SxProps = {
   height: '100%',
   justifyContent: 'center',
   alignItems: 'center',
-  borderRadius: '0 0 25px 25px',
 };
 
 export const container: SxProps = {

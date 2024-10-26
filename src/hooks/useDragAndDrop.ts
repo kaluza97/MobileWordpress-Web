@@ -9,6 +9,7 @@ export const useDragAndDrop = () => {
   const { setIsSettingsMenuActive } = useContext(SettingsMenuContext);
   const { setMessage, clearMessage } = useContext(MessageContext);
 
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { over, active } = event;
 
@@ -16,7 +17,7 @@ export const useDragAndDrop = () => {
       const accepts = over.data.current.accepts;
       const type = active.data.current.type;
 
-      if (accepts.includes(type)) {
+      if (accepts === type) {
         const droppedName = active.data.current?.name;
         setDroppedItemName(droppedName);
         clearMessage();

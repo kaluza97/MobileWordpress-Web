@@ -50,8 +50,9 @@ export const content: SxProps = {
   overflowY: 'auto',
 };
 
-export const footer: SxProps = {
+export const bottomNavigation: SxProps = {
   ...phoneSection,
   height: '10%',
+  backgroundColor: Colors.blue,
   borderRadius: '0 0 25px 25px',
 };

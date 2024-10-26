@@ -1,7 +1,7 @@
 import { Colors } from '@/variables/Colors';
 import { SxProps } from '@mui/material';
 
-export const clickableBox: SxProps = {
+export const container: SxProps = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-evenly',

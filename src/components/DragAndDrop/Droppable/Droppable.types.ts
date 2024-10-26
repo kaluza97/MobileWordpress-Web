@@ -6,4 +6,6 @@ export interface DroppableProps {
   item: string;
   type: DraggableComponentType;
   sectionName: string;
+  id: string;
+  borderRadius?: string;
 }
