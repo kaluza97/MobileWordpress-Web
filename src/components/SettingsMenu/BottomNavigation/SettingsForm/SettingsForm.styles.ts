@@ -12,9 +12,3 @@ export const selectContainer: SxProps = {
   justifyContent: 'center',
 };
 
-export const checkButtonStyles: SxProps = {
-  marginTop: '2rem',
-  marginBottom: '4rem',
-  backgroundColor: Colors.green,
-  fontWeight: 'bold',
-};

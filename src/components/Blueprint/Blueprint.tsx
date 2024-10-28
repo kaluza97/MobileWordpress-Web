@@ -27,8 +27,6 @@ export const Blueprint = ({ droppedItems }: BlueprintInterface) => {
 
     const { headerState, contentState, bottomNavigationState } = droppedItems;
 
-    console.log(droppedItems)
-
 
     return (
         <CardMedia image="/blueprint.jpg" sx={container}>

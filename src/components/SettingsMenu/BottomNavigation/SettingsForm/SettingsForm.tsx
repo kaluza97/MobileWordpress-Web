@@ -1,73 +1,72 @@
 'use client';
 import {
   Box,
-  Button,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
   TextField,
   Typography,
 } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ChangeEvent, useContext, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { AccordionContext } from '@/context/AccordionMenu/AccordionMenu';
 import { bottomNavigationIcons } from '@/constants/BottomNavigationIcons';
 import {
-  checkButtonStyles,
   container,
   selectContainer,
 } from '@/components/SettingsMenu/BottomNavigation/SettingsForm/SettingsForm.styles';
-import CheckIcon from '@mui/icons-material/Check';
-import { MessageContext } from '@/context/Messages/Message';
-import { MessageType } from '@/context/Messages/Message.types';
+import { useFormikContext } from 'formik';
+import { fetchGetSettings } from '@/services/fetchSettings';
+
+interface FormValues {
+  name: string;
+  icon: string;
+  view: string;
+}
 
 export const SettingsForm = () => {
-  const [newItemName, setNewItemName] = useState('');
-  const [newItemIcon, setNewItemIcon] = useState('');
-  const [newItemView, setNewItemView] = useState('');
   const { views } = useContext(AccordionContext);
-  const { setMessage } = useContext(MessageContext);
-  const saveButtonIsActive =
-    newItemName !== '' && newItemIcon !== '' && newItemView !== '';
+  const { values, handleChange, setValues } = useFormikContext<FormValues>();
 
-  const onNewItemNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setNewItemName(event.target.value);
-  };
 
-  const selectIcon = (event: SelectChangeEvent) => {
-    setNewItemIcon(event.target.value);
-  };
+  const loadSettings = async () => {
+    const settings = await fetchGetSettings();
+    setValues({
+      name: settings[0].name,
+      icon: settings[0].icon,
+      view: settings[0].view,
+    });
+  }
 
-  const selectView = (event: SelectChangeEvent) => {
-    setNewItemView(event.target.value);
-  };
-
-  const handleConfirm = () => {
-    setMessage('Item saved correctly.', MessageType.Success);
-  };
+  useEffect(() => {
+    loadSettings()
+  }, [])
 
   return (
     <Box sx={container}>
       <TextField
-        value={newItemName}
-        onChange={onNewItemNameChange}
+        name="name"
+        value={values.name}
+        onChange={handleChange}
         label="Name of the menu item"
         variant="outlined"
         size="small"
+        required
       />
       <FormControl sx={selectContainer}>
         <InputLabel size="small" id="icon-select-label">
           Icon of the menu item
         </InputLabel>
         <Select
+          name="icon"
           labelId="icon-select-label"
           id="icon-select"
-          value={newItemIcon}
+          value={values.icon}
           size="small"
           label="Icon of the menu item"
-          onChange={selectIcon}
+          onChange={handleChange}
+          required
         >
           {bottomNavigationIcons.map(({ icon, name }) => (
             <MenuItem value={name} key={name}>
@@ -81,12 +80,14 @@ export const SettingsForm = () => {
           View of the menu item
         </InputLabel>
         <Select
+          name="view"
           labelId="view-select-label"
           id="view-select"
-          value={newItemView}
+          value={values.view}
           size="small"
           label="View of the menu item"
-          onChange={selectView}
+          onChange={handleChange}
+          required
         >
           {views.map(({ _id, name }) => (
             <MenuItem value={_id} key={_id}>
@@ -94,15 +95,6 @@ export const SettingsForm = () => {
             </MenuItem>
           ))}
         </Select>
-        <Button
-          variant="contained"
-          startIcon={<CheckIcon />}
-          onClick={handleConfirm}
-          sx={checkButtonStyles}
-          disabled={!saveButtonIsActive}
-        >
-          Confirm
-        </Button>
       </FormControl>
     </Box>
   );
