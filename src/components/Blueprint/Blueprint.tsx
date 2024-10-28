@@ -16,10 +16,19 @@ import { DraggableComponentType } from '../DragAndDrop/DragAndDrop.types';
 import { PhoneSectionOptions } from './PhoneSectionOptions/PhoneSectionOptions';
 
 interface BlueprintInterface {
-    droppedItemName: string;
+    droppedItems: {
+        headerState: string,
+        contentState: string,
+        bottomNavigationState: string,
+    };
 }
 
-export const Blueprint = ({ droppedItemName }: BlueprintInterface) => {
+export const Blueprint = ({ droppedItems }: BlueprintInterface) => {
+
+    const { headerState, contentState, bottomNavigationState } = droppedItems;
+
+    console.log(droppedItems)
+
 
     return (
         <CardMedia image="/blueprint.jpg" sx={container}>
@@ -35,7 +44,7 @@ export const Blueprint = ({ droppedItemName }: BlueprintInterface) => {
                     <Box sx={header}>
                         <Droppable
                             sectionName="Header"
-                            item={droppedItemName}
+                            item={headerState}
                             type={DraggableComponentType.Header}
                             id={DraggableComponentType.Header}
                             borderRadius='25px 25px 0 0'
@@ -47,7 +56,7 @@ export const Blueprint = ({ droppedItemName }: BlueprintInterface) => {
                     <Box sx={content}>
                         <Droppable
                             sectionName="Content"
-                            item={droppedItemName}
+                            item={contentState}
                             type={DraggableComponentType.Content}
                             id={DraggableComponentType.Content}
                         >
@@ -57,7 +66,7 @@ export const Blueprint = ({ droppedItemName }: BlueprintInterface) => {
                     <Box sx={bottomNavigation}>
                         <Droppable
                             sectionName="Bottom Navigation"
-                            item={droppedItemName}
+                            item={bottomNavigationState}
                             type={DraggableComponentType.BottomNavigation}
                             id={DraggableComponentType.BottomNavigation}
                             borderRadius='0 0 25px 25px'

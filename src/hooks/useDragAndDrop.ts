@@ -3,37 +3,62 @@ import { DragEndEvent } from '@dnd-kit/core';
 import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 import { MessageContext } from '@/context/Messages/Message';
 import { MessageType } from '@/context/Messages/Message.types';
+import { DraggableComponentType } from '@/components/DragAndDrop/DragAndDrop.types';
+
+export type DroppedItemsState = {
+  headerState: string;
+  contentState: string;
+  bottomNavigationState: string;
+};
 
 export const useDragAndDrop = () => {
-  const [droppedItemName, setDroppedItemName] = useState('');
+  const [droppedItems, setDroppedItems] = useState<DroppedItemsState>({
+    headerState: '',
+    contentState: '',
+    bottomNavigationState: '',
+  });
   const { setIsSettingsMenuActive } = useContext(SettingsMenuContext);
   const { setMessage, clearMessage } = useContext(MessageContext);
 
+  const handleInvalidDrop = (droppedItemType: string, acceptType: string) => {
+    setIsSettingsMenuActive(false);
+    setMessage(
+      `Invalid drop: ${droppedItemType} cannot be placed in ${acceptType} area.`,
+      MessageType.Error
+    );
+  };
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { over, active } = event;
+  const handleDragEnd = ({ over, active }: DragEndEvent) => {
+    const droppedItem = active?.data?.current?.name;
+    const droppedItemType = active?.data?.current?.type;
+    const acceptType = over?.data?.current?.accepts;
 
-    if (over?.data?.current && active?.data?.current) {
-      const accepts = over.data.current.accepts;
-      const type = active.data.current.type;
 
-      if (accepts === type) {
-        const droppedName = active.data.current?.name;
-        setDroppedItemName(droppedName);
-        clearMessage();
-      } else {
-        setDroppedItemName('');
-        setIsSettingsMenuActive(false);
-        setMessage(
-          'This component type is not valid for this section on the phone!',
-          MessageType.Error
-        );
+    if (acceptType === droppedItemType) {
+      switch (droppedItemType) {
+        case DraggableComponentType.Header:
+          setDroppedItems((prevItems) => ({ ...prevItems, headerState: droppedItem }));
+          clearMessage();
+          break;
+        case DraggableComponentType.Content:
+          setDroppedItems((prevItems) => ({ ...prevItems, contentState: droppedItem }));
+          clearMessage();
+          break;
+        case DraggableComponentType.BottomNavigation:
+          setDroppedItems((prevItems) => ({ ...prevItems, bottomNavigationState: droppedItem }));
+          clearMessage();
+          break;
+        default:
+          handleInvalidDrop(droppedItemType, acceptType);
       }
+    } else {
+      handleInvalidDrop(droppedItemType, acceptType);
     }
   };
 
   return {
-    droppedItemName,
+    droppedItems,
+    setDroppedItems,
     handleDragEnd,
   };
 };

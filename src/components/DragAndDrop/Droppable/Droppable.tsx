@@ -23,16 +23,19 @@ export const Droppable = ({
     },
   });
 
+
   const isTypeCompatible = id === type;
+  const containerStyles = isOver && isTypeCompatible ? containerOnOver : container
+
 
   return (
     <Box
       ref={setNodeRef}
       sx={{
-        ...(isOver && isTypeCompatible ? containerOnOver : container),
+        ...containerStyles,
         borderRadius,
       }}
-    >      {item === type ? (
+    >      {item ? (
       children
     ) : (
       <Typography>{isOver && isTypeCompatible ? 'Drop Here' : sectionName}</Typography>
