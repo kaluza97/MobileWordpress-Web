@@ -22,7 +22,6 @@ export const Droppable = ({
     },
   });
 
-  console.log(item);
   const containerStyles = isOver ? containerOnOver : container;
 
   return (

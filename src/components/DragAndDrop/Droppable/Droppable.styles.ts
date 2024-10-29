@@ -16,7 +16,7 @@ export const container: SxProps = {
 
 export const containerOnOver = {
   ...sharedStylesOfContainer,
-  color: 'gray',
+  color: Colors.gray,
   backgroundColor: Colors.gray,
   border: `2px dotted ${Colors.white}`,
   opacity: 0.8,

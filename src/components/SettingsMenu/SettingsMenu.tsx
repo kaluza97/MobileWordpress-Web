@@ -6,7 +6,7 @@ import {
 } from '@/components/SettingsMenu/SettingsMenu.styles';
 import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 import { useContext } from 'react';
-import { BottomNavigation } from '@/components/SettingsMenu/BottomNavigation/BottomNavigation';
+import { Navigation } from '@/components/SettingsMenu/Navigation/Navigation';
 
 export const SettingsMenu = () => {
   const { isSettingsMenuActive } = useContext(SettingsMenuContext);
@@ -17,7 +17,7 @@ export const SettingsMenu = () => {
     <Card sx={container}>
       <Typography sx={titleText}>Settings</Typography>
       {isSettingsMenuActive ? (
-        <BottomNavigation SettingsSections={SettingsSections} />
+        <Navigation SettingsSections={SettingsSections} />
       ) : (
         <Typography>
           Inactive settings. Please choose one of the "Components" and drag to

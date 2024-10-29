@@ -6,24 +6,21 @@ import { EditableAccordionMenu } from '@/components/AccordionMenu/EditableAccord
 import { DraggableComponentType } from '@/components/DragAndDrop/DragAndDrop.types';
 
 export const Sidebar = () => {
-    const mockedComponents = [
-        { _id: '1', name: 'header', type: DraggableComponentType.Header },
-        { _id: '2', name: 'otherHeader', type: DraggableComponentType.Header },
-        { _id: '3', name: 'Box', type: DraggableComponentType.Content },
-        {
-            _id: '4',
-            name: 'bottomNav',
-            type: DraggableComponentType.BottomNavigation,
-        },
-    ];
+  const mockedComponents = [
+    { _id: '1', name: 'header', type: DraggableComponentType.Header },
+    { _id: '2', name: 'otherHeader', type: DraggableComponentType.Header },
+    { _id: '3', name: 'Box', type: DraggableComponentType.Content },
+    {
+      _id: '4',
+      name: 'bottomNav',
+      type: DraggableComponentType.Navigation,
+    },
+  ];
 
-    return (
-        <Box sx={container}>
-            <AccordionMenu
-                title="Components"
-                menuItems={mockedComponents}
-            />
-            <EditableAccordionMenu title="Views" />
-        </Box>
-    );
+  return (
+    <Box sx={container}>
+      <AccordionMenu title="Components" menuItems={mockedComponents} />
+      <EditableAccordionMenu title="Views" />
+    </Box>
+  );
 };

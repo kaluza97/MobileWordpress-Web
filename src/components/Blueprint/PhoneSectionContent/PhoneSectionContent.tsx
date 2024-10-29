@@ -4,19 +4,15 @@ import {
   container,
   iconBox,
   iconText,
-} from '@/components/Blueprint/PhoneSectionOptions/PhoneSectionOptions.styles';
-import { useContext } from 'react';
+} from '@/components/Blueprint/PhoneSectionContent/PhoneSectionContent.styles';
+import { FC, useContext } from 'react';
 import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ClearIcon from '@mui/icons-material/Clear';
+import { PhoneSectionContentProps } from '@/components/Blueprint/PhoneSectionContent/PhoneSectionContent.types';
 
-interface PhoneSectionOptionsProps {
-  borderRadius?: string;
-  removeDroppedItem: () => void;
-}
-
-export const PhoneSectionOptions: React.FC<PhoneSectionOptionsProps> = ({
-  borderRadius = '0px',
+export const PhoneSectionContent: FC<PhoneSectionContentProps> = ({
+  borderRadius = '0',
   removeDroppedItem,
 }) => {
   const { setIsSettingsMenuActive } = useContext(SettingsMenuContext);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import { Box } from '@mui/material';
-import { DraggableProps } from './Draggable.types';
+import { DraggableProps } from '@/components/DragAndDrop/Draggable/Draggable.types';
 
 export const Draggable = ({ children, id, name, type }: DraggableProps) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({

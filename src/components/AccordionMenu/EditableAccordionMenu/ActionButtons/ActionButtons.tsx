@@ -5,12 +5,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import { fetchRemoveItem, fetchSaveEdit } from '@/services/fetchMenuActions';
 import { iconContainer } from '@/components/AccordionMenu/EditableAccordionMenu/ActionButtons/ActionButtons.styles';
 import { ActionButtonsType } from '@/components/AccordionMenu/EditableAccordionMenu/ActionButtons/ActionButtons.types';
 import { AccordionContext } from '@/context/AccordionMenu/AccordionMenu';
 import { MessageContext } from '@/context/Messages/Message';
 import { MessageType } from '@/context/Messages/Message.types';
+import { fetchSaveEdit, fetchRemoveItem } from '@/services/Views/fetchViews';
 
 export const ActionButtons = ({ _id, name }: ActionButtonsType) => {
   const { editedItem, setEditedItem, editMode, setEditMode, views, setViews } =

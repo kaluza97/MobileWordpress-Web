@@ -1,28 +1,28 @@
 'use client';
 import { Box } from '@mui/material';
 import { CardMedia } from '@mui/material';
+import Image from 'next/image';
+import { Droppable } from '@/components/DragAndDrop/Droppable/Droppable';
+import Smartphone from '/public/phone.png';
+import { DraggableComponentType } from '@/components/DragAndDrop/DragAndDrop.types';
+import { BlueprintInterface } from '@/components/Blueprint/Blueprint.types';
 import {
   container,
   content,
-  bottomNavigation,
+  navigation,
   header,
   phoneContainer,
   phoneContent,
 } from '@/components/Blueprint/Blueprint.styles';
-import { Droppable } from '@/components/DragAndDrop/Droppable/Droppable';
-import Smartphone from '/public/phone.png';
-import Image from 'next/image';
-import { DraggableComponentType } from '../DragAndDrop/DragAndDrop.types';
-import { PhoneSectionOptions } from './PhoneSectionOptions/PhoneSectionOptions';
-import { BlueprintInterface } from './Blueprint.types';
+import { PhoneSectionContent } from '@/components/Blueprint/PhoneSectionContent/PhoneSectionContent';
 
 export const Blueprint = ({
   droppedItems,
   clearHeaderSection,
   clearContentSection,
-  clearBottomNavigationSection,
+  clearNavigationSection,
 }: BlueprintInterface) => {
-  const { headerState, contentState, bottomNavigationState } = droppedItems;
+  const { headerState, contentState, navigationState } = droppedItems;
 
   const BlueprintSections = [
     {
@@ -42,12 +42,12 @@ export const Blueprint = ({
       removeFunction: clearContentSection,
     },
     {
-      title: 'Bottom Navigation',
-      item: bottomNavigationState,
-      type: DraggableComponentType.BottomNavigation,
-      sx: bottomNavigation,
+      title: 'Navigation',
+      item: navigationState,
+      type: DraggableComponentType.Navigation,
+      sx: navigation,
       borderRadius: '0 0 25px 25px',
-      removeFunction: clearBottomNavigationSection,
+      removeFunction: clearNavigationSection,
     },
   ];
 
@@ -64,7 +64,7 @@ export const Blueprint = ({
         <Box sx={phoneContent}>
           {BlueprintSections.map(
             ({ title, item, type, sx, borderRadius, removeFunction }) => (
-              <Box sx={sx}>
+              <Box sx={sx} key={title}>
                 <Droppable
                   sectionName={title}
                   item={item}
@@ -72,7 +72,7 @@ export const Blueprint = ({
                   id={type}
                   borderRadius={borderRadius}
                 >
-                  <PhoneSectionOptions
+                  <PhoneSectionContent
                     borderRadius={borderRadius}
                     removeDroppedItem={removeFunction}
                   />

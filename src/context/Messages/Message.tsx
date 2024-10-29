@@ -4,7 +4,7 @@ import {
   MessageContextType,
   MessageContextProviderProps,
   MessageType,
-} from './Message.types';
+} from '@/context/Messages/Message.types';
 
 export const MessageContext = createContext<MessageContextType>({
   message: null,

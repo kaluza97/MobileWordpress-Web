@@ -1,4 +1,4 @@
-import { DraggableComponentType } from './../DragAndDrop.types';
+import { DraggableComponentType } from '@/components/DragAndDrop/DragAndDrop.types';
 import { ReactNode } from 'react';
 
 export interface DraggableProps {

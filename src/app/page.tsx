@@ -15,7 +15,7 @@ export default function Home() {
     handleDragEnd,
     clearHeaderSection,
     clearContentSection,
-    clearBottomNavigationSection,
+    clearNavigationSection,
   } = useDragAndDrop();
 
   return (
@@ -28,7 +28,7 @@ export default function Home() {
           droppedItems={droppedItems}
           clearHeaderSection={clearHeaderSection}
           clearContentSection={clearContentSection}
-          clearBottomNavigationSection={clearBottomNavigationSection}
+          clearNavigationSection={clearNavigationSection}
         />
         <SettingsMenu />
       </Box>

@@ -2,9 +2,9 @@ export interface BlueprintInterface {
   droppedItems: {
     headerState: string;
     contentState: string;
-    bottomNavigationState: string;
+    navigationState: string;
   };
   clearHeaderSection: () => void;
   clearContentSection: () => void;
-  clearBottomNavigationSection: () => void;
+  clearNavigationSection: () => void;
 }

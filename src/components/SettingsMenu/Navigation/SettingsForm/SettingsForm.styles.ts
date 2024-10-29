@@ -1,4 +1,3 @@
-import { Colors } from '@/variables/Colors';
 import { SxProps } from '@mui/material';
 
 export const container: SxProps = {
@@ -11,4 +10,3 @@ export const selectContainer: SxProps = {
   display: 'flex',
   justifyContent: 'center',
 };
-

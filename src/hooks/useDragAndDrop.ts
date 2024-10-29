@@ -4,18 +4,13 @@ import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 import { MessageContext } from '@/context/Messages/Message';
 import { MessageType } from '@/context/Messages/Message.types';
 import { DraggableComponentType } from '@/components/DragAndDrop/DragAndDrop.types';
-
-export type DroppedItemsState = {
-  headerState: string;
-  contentState: string;
-  bottomNavigationState: string;
-};
+import { DroppedItemsState } from '@/hooks/useDragAndDrop.types';
 
 export const useDragAndDrop = () => {
   const [droppedItems, setDroppedItems] = useState<DroppedItemsState>({
     headerState: '',
     contentState: '',
-    bottomNavigationState: '',
+    navigationState: '',
   });
   const { setIsSettingsMenuActive } = useContext(SettingsMenuContext);
   const { setMessage, clearMessage } = useContext(MessageContext);
@@ -42,10 +37,10 @@ export const useDragAndDrop = () => {
     }));
   };
 
-  const clearBottomNavigationSection = () => {
+  const clearNavigationSection = () => {
     setDroppedItems((prevItems) => ({
       ...prevItems,
-      bottomNavigationState: '',
+      navigationState: '',
     }));
   };
 
@@ -70,10 +65,10 @@ export const useDragAndDrop = () => {
           }));
           clearMessage();
           break;
-        case DraggableComponentType.BottomNavigation:
+        case DraggableComponentType.Navigation:
           setDroppedItems((prevItems) => ({
             ...prevItems,
-            bottomNavigationState: droppedItem,
+            navigationState: droppedItem,
           }));
           clearMessage();
           break;
@@ -87,10 +82,9 @@ export const useDragAndDrop = () => {
 
   return {
     droppedItems,
-    setDroppedItems,
     handleDragEnd,
     clearHeaderSection,
     clearContentSection,
-    clearBottomNavigationSection,
+    clearNavigationSection,
   };
 };

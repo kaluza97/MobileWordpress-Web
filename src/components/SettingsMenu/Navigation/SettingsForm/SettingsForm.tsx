@@ -11,24 +11,18 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useContext, useEffect } from 'react';
 import { AccordionContext } from '@/context/AccordionMenu/AccordionMenu';
-import { bottomNavigationIcons } from '@/constants/BottomNavigationIcons';
+import { navigationIcons } from '@/constants/NavigationIcons';
 import {
   container,
   selectContainer,
-} from '@/components/SettingsMenu/BottomNavigation/SettingsForm/SettingsForm.styles';
+} from '@/components/SettingsMenu/Navigation/SettingsForm/SettingsForm.styles';
 import { useFormikContext } from 'formik';
-import { fetchGetSettings } from '@/services/fetchSettings';
-
-interface FormValues {
-  name: string;
-  icon: string;
-  view: string;
-}
+import { fetchGetSettings } from '@/services/Settings/fetchSettings';
+import { FormValues } from '@/services/Settings/fetchSettings.types';
 
 export const SettingsForm = () => {
   const { views } = useContext(AccordionContext);
   const { values, handleChange, setValues } = useFormikContext<FormValues>();
-
 
   const loadSettings = async () => {
     const settings = await fetchGetSettings();
@@ -37,11 +31,11 @@ export const SettingsForm = () => {
       icon: settings[0].icon,
       view: settings[0].view,
     });
-  }
+  };
 
   useEffect(() => {
-    loadSettings()
-  }, [])
+    loadSettings();
+  }, []);
 
   return (
     <Box sx={container}>
@@ -68,7 +62,7 @@ export const SettingsForm = () => {
           onChange={handleChange}
           required
         >
-          {bottomNavigationIcons.map(({ icon, name }) => (
+          {navigationIcons.map(({ icon, name }) => (
             <MenuItem value={name} key={name}>
               <FontAwesomeIcon icon={icon} />
             </MenuItem>

@@ -1,4 +1,5 @@
 import { Colors } from '@/variables/Colors';
+import { ZIndex } from '@/variables/ZIndex';
 import { SxProps } from '@mui/material';
 
 export const container: SxProps = {
@@ -8,7 +9,7 @@ export const container: SxProps = {
   position: 'relative',
   justifyContent: 'center',
   alignItems: 'center',
-  zIndex: 100,
+  zIndex: ZIndex.default,
 };
 
 export const phoneContainer: SxProps = {
@@ -50,7 +51,7 @@ export const content: SxProps = {
   overflowY: 'auto',
 };
 
-export const bottomNavigation: SxProps = {
+export const navigation: SxProps = {
   ...phoneSection,
   height: '10%',
   backgroundColor: Colors.blue,
