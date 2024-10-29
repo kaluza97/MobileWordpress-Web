@@ -11,13 +11,11 @@ import { Navigation } from '@/components/SettingsMenu/Navigation/Navigation';
 export const SettingsMenu = () => {
   const { isSettingsMenuActive } = useContext(SettingsMenuContext);
 
-  const SettingsSections = [{ sectionId: '1' }, { sectionId: '2' }];
-
   return (
     <Card sx={container}>
       <Typography sx={titleText}>Settings</Typography>
       {isSettingsMenuActive ? (
-        <Navigation SettingsSections={SettingsSections} />
+        <Navigation />
       ) : (
         <Typography>
           Inactive settings. Please choose one of the "Components" and drag to

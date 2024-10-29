@@ -5,11 +5,12 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
   TextField,
   Typography,
 } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useContext, useEffect } from 'react';
+import { ChangeEvent, FC, useContext, useEffect } from 'react';
 import { AccordionContext } from '@/context/AccordionMenu/AccordionMenu';
 import { navigationIcons } from '@/constants/NavigationIcons';
 import {
@@ -20,9 +21,18 @@ import { useFormikContext } from 'formik';
 import { fetchGetSettings } from '@/services/Settings/fetchSettings';
 import { FormValues } from '@/services/Settings/fetchSettings.types';
 
-export const SettingsForm = () => {
+interface SettingsFormProps {
+  values: FormValues;
+  onChange: (
+    e:
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | SelectChangeEvent<string>
+  ) => void;
+}
+
+export const SettingsForm: FC<SettingsFormProps> = ({ values, onChange }) => {
   const { views } = useContext(AccordionContext);
-  const { values, handleChange, setValues } = useFormikContext<FormValues>();
+  const { setValues } = useFormikContext<FormValues>();
 
   const loadSettings = async () => {
     const settings = await fetchGetSettings();
@@ -42,7 +52,7 @@ export const SettingsForm = () => {
       <TextField
         name="name"
         value={values.name}
-        onChange={handleChange}
+        onChange={onChange}
         label="Name of the menu item"
         variant="outlined"
         size="small"
@@ -59,7 +69,7 @@ export const SettingsForm = () => {
           value={values.icon}
           size="small"
           label="Icon of the menu item"
-          onChange={handleChange}
+          onChange={onChange}
           required
         >
           {navigationIcons.map(({ icon, name }) => (
@@ -80,7 +90,7 @@ export const SettingsForm = () => {
           value={values.view}
           size="small"
           label="View of the menu item"
-          onChange={handleChange}
+          onChange={onChange}
           required
         >
           {views.map(({ _id, name }) => (

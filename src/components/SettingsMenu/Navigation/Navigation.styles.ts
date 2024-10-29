@@ -6,10 +6,8 @@ export const container: SxProps = {
   flexDirection: 'column',
 };
 
-export const selectContainer: SxProps = {
+export const formContainer: SxProps = {
   marginTop: '2rem',
-  display: 'flex',
-  justifyContent: 'center',
 };
 
 export const sectionText: SxProps = {
@@ -21,5 +19,11 @@ export const sectionText: SxProps = {
 
 export const checkButtonStyles: SxProps = {
   backgroundColor: Colors.green,
+  fontWeight: 'bold',
+};
+
+export const addButtonStyles: SxProps = {
+  marginTop: '1rem',
+  backgroundColor: Colors.orange,
   fontWeight: 'bold',
 };
