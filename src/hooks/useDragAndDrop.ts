@@ -28,24 +28,53 @@ export const useDragAndDrop = () => {
     );
   };
 
+  const clearHeaderSection = () => {
+    setDroppedItems((prevItems) => ({
+      ...prevItems,
+      headerState: '',
+    }));
+  };
+
+  const clearContentSection = () => {
+    setDroppedItems((prevItems) => ({
+      ...prevItems,
+      contentState: '',
+    }));
+  };
+
+  const clearBottomNavigationSection = () => {
+    setDroppedItems((prevItems) => ({
+      ...prevItems,
+      bottomNavigationState: '',
+    }));
+  };
+
   const handleDragEnd = ({ over, active }: DragEndEvent) => {
     const droppedItem = active?.data?.current?.name;
     const droppedItemType = active?.data?.current?.type;
     const acceptType = over?.data?.current?.accepts;
 
-
     if (acceptType === droppedItemType) {
       switch (droppedItemType) {
         case DraggableComponentType.Header:
-          setDroppedItems((prevItems) => ({ ...prevItems, headerState: droppedItem }));
+          setDroppedItems((prevItems) => ({
+            ...prevItems,
+            headerState: droppedItem,
+          }));
           clearMessage();
           break;
         case DraggableComponentType.Content:
-          setDroppedItems((prevItems) => ({ ...prevItems, contentState: droppedItem }));
+          setDroppedItems((prevItems) => ({
+            ...prevItems,
+            contentState: droppedItem,
+          }));
           clearMessage();
           break;
         case DraggableComponentType.BottomNavigation:
-          setDroppedItems((prevItems) => ({ ...prevItems, bottomNavigationState: droppedItem }));
+          setDroppedItems((prevItems) => ({
+            ...prevItems,
+            bottomNavigationState: droppedItem,
+          }));
           clearMessage();
           break;
         default:
@@ -60,5 +89,8 @@ export const useDragAndDrop = () => {
     droppedItems,
     setDroppedItems,
     handleDragEnd,
+    clearHeaderSection,
+    clearContentSection,
+    clearBottomNavigationSection,
   };
 };

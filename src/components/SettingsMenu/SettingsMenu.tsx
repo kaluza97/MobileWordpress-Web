@@ -11,12 +11,7 @@ import { BottomNavigation } from '@/components/SettingsMenu/BottomNavigation/Bot
 export const SettingsMenu = () => {
   const { isSettingsMenuActive } = useContext(SettingsMenuContext);
 
-  const SettingsSections = [
-    { sectionId: '1' },
-    { sectionId: '2' },
-    { sectionId: '3' },
-    { sectionId: '4' },
-  ];
+  const SettingsSections = [{ sectionId: '1' }, { sectionId: '2' }];
 
   return (
     <Card sx={container}>

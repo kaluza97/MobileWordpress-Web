@@ -14,7 +14,6 @@ export const Droppable = ({
   sectionName,
   id,
   borderRadius = '0px',
-
 }: DroppableProps) => {
   const { isOver, setNodeRef } = useDroppable({
     id: id,
@@ -23,10 +22,8 @@ export const Droppable = ({
     },
   });
 
-
-  const isTypeCompatible = id === type;
-  const containerStyles = isOver && isTypeCompatible ? containerOnOver : container
-
+  console.log(item);
+  const containerStyles = isOver ? containerOnOver : container;
 
   return (
     <Box
@@ -35,11 +32,12 @@ export const Droppable = ({
         ...containerStyles,
         borderRadius,
       }}
-    >      {item ? (
-      children
-    ) : (
-      <Typography>{isOver && isTypeCompatible ? 'Drop Here' : sectionName}</Typography>
-    )}
+    >
+      {item ? (
+        children
+      ) : (
+        <Typography>{isOver ? 'Drop Here' : sectionName}</Typography>
+      )}
     </Box>
   );
 };

@@ -10,7 +10,13 @@ import { Message } from '@/components/Messages/Message';
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
 
 export default function Home() {
-  const { droppedItems, handleDragEnd } = useDragAndDrop();
+  const {
+    droppedItems,
+    handleDragEnd,
+    clearHeaderSection,
+    clearContentSection,
+    clearBottomNavigationSection,
+  } = useDragAndDrop();
 
   return (
     <DndContext onDragEnd={handleDragEnd} collisionDetection={rectIntersection}>
@@ -18,7 +24,12 @@ export default function Home() {
       <Message />
       <Box sx={container}>
         <Sidebar />
-        <Blueprint droppedItems={droppedItems} />
+        <Blueprint
+          droppedItems={droppedItems}
+          clearHeaderSection={clearHeaderSection}
+          clearContentSection={clearContentSection}
+          clearBottomNavigationSection={clearBottomNavigationSection}
+        />
         <SettingsMenu />
       </Box>
     </DndContext>

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { Box, IconButton, Typography } from '@mui/material';
 import {
   container,
@@ -10,13 +10,14 @@ import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ClearIcon from '@mui/icons-material/Clear';
 
-
 interface PhoneSectionOptionsProps {
   borderRadius?: string;
+  removeDroppedItem: () => void;
 }
 
 export const PhoneSectionOptions: React.FC<PhoneSectionOptionsProps> = ({
-  borderRadius = '0px'
+  borderRadius = '0px',
+  removeDroppedItem,
 }) => {
   const { setIsSettingsMenuActive } = useContext(SettingsMenuContext);
 
@@ -26,6 +27,7 @@ export const PhoneSectionOptions: React.FC<PhoneSectionOptionsProps> = ({
 
   const handleClearElement = () => {
     setIsSettingsMenuActive(false);
+    removeDroppedItem();
   };
 
   return (
