@@ -3,3 +3,9 @@ export interface FormValues {
   icon: string;
   view: string;
 }
+
+export interface NavigationData {
+  header: Array<string>;
+  content: Array<string>;
+  navigation: Array<FormValues>;
+}

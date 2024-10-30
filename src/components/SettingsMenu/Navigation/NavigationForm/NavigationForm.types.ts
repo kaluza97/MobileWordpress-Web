@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import { SelectChangeEvent } from '@mui/material';
 import { FormValues } from '@/services/Settings/fetchSettings.types';
 
-export interface SettingsFormProps {
+export interface NavigationFormProps {
   values: FormValues;
   onChange: (
     event:

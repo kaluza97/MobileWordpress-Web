@@ -6,7 +6,7 @@ import {
   checkButtonStyles,
   container,
 } from '@/components/SettingsMenu/Navigation/Navigation.styles';
-import { SettingsForm } from '@/components/SettingsMenu/Navigation/SettingsForm/SettingsForm';
+import { NavigationForm } from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm';
 import { FormValues } from '@/services/Settings/fetchSettings.types';
 import CheckIcon from '@mui/icons-material/Check';
 import { mockedBackend } from '@/constants/MockedBackend';
@@ -64,7 +64,7 @@ export const Navigation = () => {
         >
           {({ values, handleChange, handleSubmit }) => (
             <Box component="form" onSubmit={handleSubmit}>
-              <SettingsForm
+              <NavigationForm
                 values={values}
                 onChange={handleChange}
                 index={id}

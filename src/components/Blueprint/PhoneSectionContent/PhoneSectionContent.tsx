@@ -1,18 +1,17 @@
 'use client';
-import { Box, IconButton, Typography } from '@mui/material';
+import { FC, useContext } from 'react';
+import { Box, Typography } from '@mui/material';
 import {
   container,
-  iconBox,
   iconText,
+  text
 } from '@/components/Blueprint/PhoneSectionContent/PhoneSectionContent.styles';
-import { FC, useContext } from 'react';
 import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import ClearIcon from '@mui/icons-material/Clear';
 import { PhoneSectionContentProps } from '@/components/Blueprint/PhoneSectionContent/PhoneSectionContent.types';
 
 export const PhoneSectionContent: FC<PhoneSectionContentProps> = ({
   borderRadius = '0',
+  itemName,
   removeDroppedItem,
 }) => {
   const { setIsSettingsMenuActive } = useContext(SettingsMenuContext);
@@ -28,14 +27,13 @@ export const PhoneSectionContent: FC<PhoneSectionContentProps> = ({
 
   return (
     <Box sx={{ ...container, borderRadius }}>
-      <IconButton sx={iconBox} onClick={handleClearElement}>
-        <ClearIcon />
+      <Typography sx={text}>{itemName}</Typography>
+      <Box onClick={handleClearElement}>
         <Typography sx={iconText}>Clear</Typography>
-      </IconButton>
-      <IconButton sx={iconBox} onClick={handleActiveSetting}>
-        <VisibilityIcon />
+      </Box>
+      <Box onClick={handleActiveSetting} >
         <Typography sx={iconText}>Settings</Typography>
-      </IconButton>
+      </Box>
     </Box>
   );
 };

@@ -19,7 +19,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export const navigationIcons = [
-  { icon: faHeart, name: 'Favorites' },
+  { icon: faHeart, name: 'FavoritesHeart' },
   { icon: faUser, name: 'Profile' },
   { icon: faHome, name: 'Home' },
   { icon: faSearch, name: 'Search' },

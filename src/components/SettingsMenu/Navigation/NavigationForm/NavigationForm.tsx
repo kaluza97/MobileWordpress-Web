@@ -16,10 +16,10 @@ import {
   container,
   sectionText,
   selectContainer,
-} from '@/components/SettingsMenu/Navigation/SettingsForm/SettingsForm.styles';
-import { SettingsFormProps } from '@/components/SettingsMenu/Navigation/SettingsForm/SettingsForm.types';
+} from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm.styles';
+import { NavigationFormProps } from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm.types';
 
-export const SettingsForm: FC<SettingsFormProps> = ({
+export const NavigationForm: FC<NavigationFormProps> = ({
   values,
   onChange,
   index,
@@ -53,7 +53,7 @@ export const SettingsForm: FC<SettingsFormProps> = ({
           onChange={onChange}
           size="small"
           label="Icon of the menu item"
-          // required
+          required
         >
           {navigationIcons.map(({ icon, name }) => (
             <MenuItem value={name} key={name}>
@@ -74,7 +74,7 @@ export const SettingsForm: FC<SettingsFormProps> = ({
           onChange={onChange}
           size="small"
           label="View of the menu item"
-          // required
+        // required
         >
           {views.map(({ _id, name }) => (
             <MenuItem value={_id} key={_id}>
