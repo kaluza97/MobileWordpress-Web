@@ -10,18 +10,15 @@ import { NavigationForm } from '@/components/SettingsMenu/Navigation/NavigationF
 import { FormValues } from '@/services/Settings/fetchSettings.types';
 import CheckIcon from '@mui/icons-material/Check';
 import { mockedBackend } from '@/constants/MockedBackend';
-import { Formik } from 'formik';
 
 const MAX_SECTIONS = 6;
 
 export const Navigation = () => {
   const initialMenuObject: FormValues = { name: '', icon: '', view: '' };
-  const [sections, setSections] = useState<Array<FormValues>>([
-    initialMenuObject,
-  ]);
+  const [formValues, setFormValues] = useState<Array<FormValues>>([initialMenuObject]);
 
   useEffect(() => {
-    setSections(
+    setFormValues(
       mockedBackend.navigation.length
         ? mockedBackend.navigation
         : [initialMenuObject]
@@ -29,13 +26,13 @@ export const Navigation = () => {
   }, []);
 
   const addSection = () => {
-    if (sections.length < MAX_SECTIONS) {
-      setSections((prevSections) => [...prevSections, initialMenuObject]);
+    if (formValues.length < MAX_SECTIONS) {
+      setFormValues((prevValues) => [...prevValues, initialMenuObject]);
     }
   };
 
-  const handleSubmit = (values: FormValues) => {
-    alert(JSON.stringify(values, null, 2));
+  const handleConfirm = () => {
+    alert(JSON.stringify(formValues, null, 2));
   };
 
   return (
@@ -43,6 +40,7 @@ export const Navigation = () => {
       <Button
         variant="contained"
         startIcon={<CheckIcon />}
+        onClick={handleConfirm}
         sx={checkButtonStyles}
       >
         Confirm
@@ -50,29 +48,19 @@ export const Navigation = () => {
       <Button
         onClick={addSection}
         variant="contained"
-        disabled={sections.length >= MAX_SECTIONS}
+        disabled={formValues.length >= MAX_SECTIONS}
         sx={addButtonStyles}
       >
         Add Section
       </Button>
-      {sections.map((item, id) => (
-        <Formik
+      {formValues.map((item, id) => (
+        <NavigationForm
           key={id}
-          initialValues={item}
-          onSubmit={(values) => handleSubmit(values)}
-          enableReinitialize
-        >
-          {({ values, handleChange, handleSubmit }) => (
-            <Box component="form" onSubmit={handleSubmit}>
-              <NavigationForm
-                values={values}
-                onChange={handleChange}
-                index={id}
-                maxSections={MAX_SECTIONS}
-              />
-            </Box>
-          )}
-        </Formik>
+          values={item}
+          setFormValues={setFormValues}
+          index={id}
+          maxSections={MAX_SECTIONS}
+        />
       ))}
     </Box>
   );

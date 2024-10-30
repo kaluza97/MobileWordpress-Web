@@ -17,15 +17,25 @@ import {
   sectionText,
   selectContainer,
 } from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm.styles';
-import { NavigationFormProps } from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm.types';
+import { HandleChange, NavigationFormProps } from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm.types';
 
 export const NavigationForm: FC<NavigationFormProps> = ({
   values,
-  onChange,
+  setFormValues,
   index,
   maxSections,
 }) => {
   const { views } = useContext(AccordionContext);
+
+
+  const handleChange: HandleChange = (name) => (event) => {
+    const value = (event.target as HTMLInputElement).value;
+    setFormValues((prevValues) => {
+      const updatedValues = [...prevValues];
+      updatedValues[index] = { ...updatedValues[index], [name]: value };
+      return updatedValues;
+    });
+  };
 
   return (
     <Box sx={container}>
@@ -35,7 +45,7 @@ export const NavigationForm: FC<NavigationFormProps> = ({
       <TextField
         name="name"
         value={values.name}
-        onChange={onChange}
+        onChange={handleChange('name')}
         label="Name of the menu item"
         variant="outlined"
         size="small"
@@ -50,7 +60,7 @@ export const NavigationForm: FC<NavigationFormProps> = ({
           labelId="icon-select-label"
           id="icon-select"
           value={values.icon}
-          onChange={onChange}
+          onChange={handleChange('icon')}
           size="small"
           label="Icon of the menu item"
           required
@@ -71,7 +81,7 @@ export const NavigationForm: FC<NavigationFormProps> = ({
           labelId="view-select-label"
           id="view-select"
           value={values.view}
-          onChange={onChange}
+          onChange={handleChange('view')}
           size="small"
           label="View of the menu item"
         // required
