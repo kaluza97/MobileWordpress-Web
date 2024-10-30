@@ -1,74 +1,46 @@
 'use client';
-import { useContext, useState } from 'react';
-import { Box, Button, Typography } from '@mui/material';
-import { Formik } from 'formik';
+import { useEffect, useState } from 'react';
+import { Box, Button } from '@mui/material';
 import {
   addButtonStyles,
   checkButtonStyles,
   container,
-  formContainer,
-  sectionText,
 } from '@/components/SettingsMenu/Navigation/Navigation.styles';
 import { SettingsForm } from '@/components/SettingsMenu/Navigation/SettingsForm/SettingsForm';
-import { MessageType } from '@/context/Messages/Message.types';
-import { MessageContext } from '@/context/Messages/Message';
-import { fetchSaveSettings } from '@/services/Settings/fetchSettings';
 import { FormValues } from '@/services/Settings/fetchSettings.types';
 import CheckIcon from '@mui/icons-material/Check';
+import { mockedBackend } from '@/constants/MockedBackend';
+import { Formik } from 'formik';
 
 const MAX_SECTIONS = 6;
 
 export const Navigation = () => {
-  const { setMessage } = useContext(MessageContext);
+  const initialMenuObject: FormValues = { name: '', icon: '', view: '' };
   const [sections, setSections] = useState<Array<FormValues>>([
-    { name: '', icon: '', view: '' },
+    initialMenuObject,
   ]);
+
+  useEffect(() => {
+    setSections(
+      mockedBackend.navigation.length
+        ? mockedBackend.navigation
+        : [initialMenuObject]
+    );
+  }, []);
 
   const addSection = () => {
     if (sections.length < MAX_SECTIONS) {
-      setSections([...sections, { name: '', icon: '', view: '' }]);
+      setSections((prevSections) => [...prevSections, initialMenuObject]);
     }
   };
 
-  const handleSectionSubmit = async (values: FormValues, index: number) => {
-    try {
-      await fetchSaveSettings(values);
-      setMessage(`Section ${index + 1} saved correctly.`, MessageType.Success);
-    } catch (error) {
-      setMessage(`Error saving section ${index + 1}.`, MessageType.Error);
-    }
+  const handleSubmit = (values: FormValues) => {
+    alert(JSON.stringify(values, null, 2));
   };
-
-  const renderSections = () =>
-    sections.map((section, index) => (
-      <Formik
-        key={index}
-        initialValues={section}
-        onSubmit={(values) => handleSectionSubmit(values, index)}
-        enableReinitialize
-      >
-        {({ handleSubmit, values, handleChange }) => (
-          <Box
-            component="form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-            sx={formContainer}
-          >
-            <Typography sx={sectionText}>
-              {index + 1} / {MAX_SECTIONS}
-            </Typography>
-            <SettingsForm values={values} onChange={handleChange} />
-          </Box>
-        )}
-      </Formik>
-    ));
 
   return (
     <Box sx={container}>
       <Button
-        type="submit"
         variant="contained"
         startIcon={<CheckIcon />}
         sx={checkButtonStyles}
@@ -83,7 +55,25 @@ export const Navigation = () => {
       >
         Add Section
       </Button>
-      {renderSections()}
+      {sections.map((item, id) => (
+        <Formik
+          key={id}
+          initialValues={item}
+          onSubmit={(values) => handleSubmit(values)}
+          enableReinitialize
+        >
+          {({ values, handleChange, handleSubmit }) => (
+            <Box component="form" onSubmit={handleSubmit}>
+              <SettingsForm
+                values={values}
+                onChange={handleChange}
+                index={id}
+                maxSections={MAX_SECTIONS}
+              />
+            </Box>
+          )}
+        </Formik>
+      ))}
     </Box>
   );
 };

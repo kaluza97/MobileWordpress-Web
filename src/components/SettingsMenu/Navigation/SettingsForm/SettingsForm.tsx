@@ -5,50 +5,33 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
   TextField,
   Typography,
 } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ChangeEvent, FC, useContext, useEffect } from 'react';
+import { FC, useContext } from 'react';
 import { AccordionContext } from '@/context/AccordionMenu/AccordionMenu';
 import { navigationIcons } from '@/constants/NavigationIcons';
 import {
   container,
+  sectionText,
   selectContainer,
 } from '@/components/SettingsMenu/Navigation/SettingsForm/SettingsForm.styles';
-import { useFormikContext } from 'formik';
-import { fetchGetSettings } from '@/services/Settings/fetchSettings';
-import { FormValues } from '@/services/Settings/fetchSettings.types';
+import { SettingsFormProps } from '@/components/SettingsMenu/Navigation/SettingsForm/SettingsForm.types';
 
-interface SettingsFormProps {
-  values: FormValues;
-  onChange: (
-    e:
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      | SelectChangeEvent<string>
-  ) => void;
-}
-
-export const SettingsForm: FC<SettingsFormProps> = ({ values, onChange }) => {
+export const SettingsForm: FC<SettingsFormProps> = ({
+  values,
+  onChange,
+  index,
+  maxSections,
+}) => {
   const { views } = useContext(AccordionContext);
-  const { setValues } = useFormikContext<FormValues>();
-
-  const loadSettings = async () => {
-    const settings = await fetchGetSettings();
-    setValues({
-      name: settings[0].name,
-      icon: settings[0].icon,
-      view: settings[0].view,
-    });
-  };
-
-  useEffect(() => {
-    loadSettings();
-  }, []);
 
   return (
     <Box sx={container}>
+      <Typography sx={sectionText}>
+        {index + 1}/{maxSections}
+      </Typography>
       <TextField
         name="name"
         value={values.name}
@@ -67,10 +50,10 @@ export const SettingsForm: FC<SettingsFormProps> = ({ values, onChange }) => {
           labelId="icon-select-label"
           id="icon-select"
           value={values.icon}
+          onChange={onChange}
           size="small"
           label="Icon of the menu item"
-          onChange={onChange}
-          required
+          // required
         >
           {navigationIcons.map(({ icon, name }) => (
             <MenuItem value={name} key={name}>
@@ -88,10 +71,10 @@ export const SettingsForm: FC<SettingsFormProps> = ({ values, onChange }) => {
           labelId="view-select-label"
           id="view-select"
           value={values.view}
+          onChange={onChange}
           size="small"
           label="View of the menu item"
-          onChange={onChange}
-          required
+          // required
         >
           {views.map(({ _id, name }) => (
             <MenuItem value={_id} key={_id}>
