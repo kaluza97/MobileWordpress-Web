@@ -1,6 +1,16 @@
-import { Dispatch, SetStateAction } from "react";
+import { DraggableComponentType } from '@/components/DragAndDrop/DragAndDrop.types';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
-export interface SettingsContextType {
-    isSettingsActive: boolean;
-    setIsSettingsActive: Dispatch<SetStateAction<boolean>>;
+export type SettingsMenuItem = {
+  type: DraggableComponentType | null;
+  name: string;
+};
+
+export interface SettingsMenuContextType {
+  activeSettingsMenu: SettingsMenuItem;
+  setActiveSettingsMenu: Dispatch<SetStateAction<SettingsMenuItem>>;
+}
+
+export interface SettingsMenuContextProviderProps {
+  children: ReactNode;
 }
