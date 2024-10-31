@@ -27,9 +27,9 @@ export const NavigationForm: FC<NavigationFormProps> = ({
 }) => {
   const { views } = useContext(AccordionContext);
 
-
   const handleChange: HandleChange = (name) => (event) => {
-    const value = (event.target as HTMLInputElement).value;
+    const value = event.target.value;
+
     setFormValues((prevValues) => {
       const updatedValues = [...prevValues];
       updatedValues[index] = { ...updatedValues[index], [name]: value };
@@ -42,6 +42,7 @@ export const NavigationForm: FC<NavigationFormProps> = ({
       <Typography sx={sectionText}>
         {index + 1}/{maxSections}
       </Typography>
+
       <TextField
         name="name"
         value={values.name}
@@ -51,6 +52,7 @@ export const NavigationForm: FC<NavigationFormProps> = ({
         size="small"
         required
       />
+
       <FormControl sx={selectContainer}>
         <InputLabel size="small" id="icon-select-label">
           Icon of the menu item
@@ -72,6 +74,7 @@ export const NavigationForm: FC<NavigationFormProps> = ({
           ))}
         </Select>
       </FormControl>
+
       <FormControl sx={selectContainer}>
         <InputLabel size="small" id="view-select-label">
           View of the menu item
@@ -84,7 +87,7 @@ export const NavigationForm: FC<NavigationFormProps> = ({
           onChange={handleChange('view')}
           size="small"
           label="View of the menu item"
-        // required
+          required
         >
           {views.map(({ _id, name }) => (
             <MenuItem value={_id} key={_id}>

@@ -1,4 +1,4 @@
-import { NavigationData } from '@/services/Settings/fetchSettings.types';
+import { FormValues } from '@/services/Settings/fetchSettings.types';
 
 const endpoint = process.env.NEXT_PUBLIC_API_NAVIGATION_ENDPOINT;
 
@@ -8,30 +8,30 @@ if (!endpoint) {
   );
 }
 
-export const fetchGetNavigation = async () => {
-  const response = await fetch(endpoint, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  });
-  return response.json();
+export const fetchNavigation = async (): Promise<Array<FormValues>> => {
+  try {
+    const response = await fetch(endpoint);
+    const data = await response.json();
+
+    const combinedNavigation = Array.isArray(data)
+      ? data.flatMap((item) => item.navigation).filter(Boolean)
+      : [];
+
+    return combinedNavigation;
+  } catch (error) {
+    console.error('Error fetching data api/navigation:', error);
+    throw error;
+  }
 };
 
-export const fetchSaveNavigation = async (navigationData: NavigationData): Promise<NavigationData> => {
-  try {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(navigationData),
-    });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Error saving navigation: ${response.status} ${errorText}`);
-    }
+export const fetchSaveNavigation = async (navigationData: Array<FormValues>) => {
+  const request = await fetch(endpoint, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ navigation: navigationData }),
+  });
 
-    return response.json();
-  } catch (error) {
-    console.error('Failed to save navigation:', error);
-    throw new Error('Failed to save navigation. Please try again later.');
-  }
+  const result = await request.json();
+  return result;
 };

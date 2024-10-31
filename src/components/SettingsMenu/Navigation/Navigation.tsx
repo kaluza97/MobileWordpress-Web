@@ -9,7 +9,7 @@ import {
 import { NavigationForm } from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm';
 import { FormValues } from '@/services/Settings/fetchSettings.types';
 import CheckIcon from '@mui/icons-material/Check';
-import { mockedBackend } from '@/constants/MockedBackend';
+import { fetchNavigation, fetchSaveNavigation } from '@/services/Settings/fetchSettings';
 
 const MAX_SECTIONS = 6;
 
@@ -17,13 +17,20 @@ export const Navigation = () => {
   const initialMenuObject: FormValues = { name: '', icon: '', view: '' };
   const [formValues, setFormValues] = useState<Array<FormValues>>([initialMenuObject]);
 
+
   useEffect(() => {
-    setFormValues(
-      mockedBackend.navigation.length
-        ? mockedBackend.navigation
-        : [initialMenuObject]
-    );
+    const fetchData = async () => {
+      const navigationData = await fetchNavigation();
+      setFormValues(navigationData.length ? navigationData : [initialMenuObject]);
+    };
+    fetchData();
   }, []);
+
+
+  useEffect(() => {
+    console.log(formValues, 'formValues')
+  }, [formValues]);
+
 
   const addSection = () => {
     if (formValues.length < MAX_SECTIONS) {
@@ -31,8 +38,13 @@ export const Navigation = () => {
     }
   };
 
-  const handleConfirm = () => {
-    alert(JSON.stringify(formValues, null, 2));
+  const handleConfirm = async () => {
+    try {
+      const savedData = await fetchSaveNavigation(formValues);
+      console.log('Navigation updated successfully:', savedData);
+    } catch (error) {
+      console.error('Error updating navigation:', error);
+    }
   };
 
   return (
