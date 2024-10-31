@@ -1,10 +1,11 @@
 'use client';
 import { useContext, useEffect, useState } from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import {
   addButtonStyles,
   checkButtonStyles,
   container,
+  titleText,
 } from '@/components/SettingsMenu/Navigation/Navigation.styles';
 import { NavigationForm } from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm';
 import { FormValues } from '@/services/Settings/fetchSettings.types';
@@ -15,11 +16,13 @@ import {
 } from '@/services/Settings/fetchSettings';
 import { MessageContext } from '@/context/Messages/Message';
 import { MessageType } from '@/context/Messages/Message.types';
+import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 
 const MAX_SECTIONS = 6;
 
 export const Navigation = () => {
   const { setMessage } = useContext(MessageContext);
+  const { activeSettingsMenu } = useContext(SettingsMenuContext);
   const initialMenuObject: FormValues = { name: '', icon: '', view: '' };
   const [formValues, setFormValues] = useState<Array<FormValues>>([
     initialMenuObject,
@@ -52,6 +55,7 @@ export const Navigation = () => {
 
   return (
     <Box sx={container}>
+      <Typography sx={titleText}>{activeSettingsMenu.name}</Typography>
       <Button
         variant="contained"
         startIcon={<CheckIcon />}

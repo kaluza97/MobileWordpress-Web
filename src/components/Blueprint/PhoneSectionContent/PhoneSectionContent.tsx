@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/material';
 import {
   container,
   iconText,
-  text
+  text,
 } from '@/components/Blueprint/PhoneSectionContent/PhoneSectionContent.styles';
 import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 import { PhoneSectionContentProps } from '@/components/Blueprint/PhoneSectionContent/PhoneSectionContent.types';
@@ -12,16 +12,17 @@ import { PhoneSectionContentProps } from '@/components/Blueprint/PhoneSectionCon
 export const PhoneSectionContent: FC<PhoneSectionContentProps> = ({
   borderRadius = '0',
   itemName,
+  itemType,
   removeDroppedItem,
 }) => {
-  const { setIsSettingsMenuActive } = useContext(SettingsMenuContext);
+  const { setActiveSettingsMenu } = useContext(SettingsMenuContext);
 
   const handleActiveSetting = () => {
-    setIsSettingsMenuActive(true);
+    setActiveSettingsMenu({ type: itemType, name: itemName });
   };
 
   const handleClearElement = () => {
-    setIsSettingsMenuActive(false);
+    setActiveSettingsMenu({ type: null, name: '' });
     removeDroppedItem();
   };
 
@@ -31,7 +32,7 @@ export const PhoneSectionContent: FC<PhoneSectionContentProps> = ({
       <Box onClick={handleClearElement}>
         <Typography sx={iconText}>Clear</Typography>
       </Box>
-      <Box onClick={handleActiveSetting} >
+      <Box onClick={handleActiveSetting}>
         <Typography sx={iconText}>Settings</Typography>
       </Box>
     </Box>

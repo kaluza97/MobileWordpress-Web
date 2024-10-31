@@ -12,11 +12,11 @@ export const useDragAndDrop = () => {
     contentState: '',
     navigationState: '',
   });
-  const { setIsSettingsMenuActive } = useContext(SettingsMenuContext);
+  const { setActiveSettingsMenu } = useContext(SettingsMenuContext);
   const { setMessage, clearMessage } = useContext(MessageContext);
 
   const handleInvalidDrop = (droppedItemType: string, acceptType: string) => {
-    setIsSettingsMenuActive(false);
+    setActiveSettingsMenu({ type: null, name: '' });
     setMessage(
       `Invalid drop: ${droppedItemType} cannot be placed in ${acceptType} area.`,
       MessageType.Error

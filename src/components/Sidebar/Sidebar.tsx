@@ -7,12 +7,12 @@ import { DraggableComponentType } from '@/components/DragAndDrop/DragAndDrop.typ
 
 export const Sidebar = () => {
   const mockedComponents = [
-    { _id: '1', name: 'header', type: DraggableComponentType.Header },
-    { _id: '2', name: 'otherHeader', type: DraggableComponentType.Header },
+    { _id: '1', name: 'Header', type: DraggableComponentType.Header },
+    { _id: '2', name: 'Burger Menu', type: DraggableComponentType.Header },
     { _id: '3', name: 'Box', type: DraggableComponentType.Content },
     {
       _id: '4',
-      name: 'bottomNav',
+      name: 'Navigation',
       type: DraggableComponentType.Navigation,
     },
   ];

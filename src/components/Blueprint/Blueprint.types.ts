@@ -1,4 +1,4 @@
-export interface BlueprintInterface {
+export interface BlueprintProps {
   droppedItems: {
     headerState: string;
     contentState: string;

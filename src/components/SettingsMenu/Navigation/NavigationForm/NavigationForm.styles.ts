@@ -14,7 +14,7 @@ export const selectContainer: SxProps = {
 };
 
 export const sectionText: SxProps = {
-  marginTop: '2rem',
+  marginTop: '1rem',
   marginBottom: '1rem',
   fontSize: '1.6rem',
   fontWeight: 'bold',

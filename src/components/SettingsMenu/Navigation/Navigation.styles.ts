@@ -13,10 +13,18 @@ export const formContainer: SxProps = {
 export const checkButtonStyles: SxProps = {
   backgroundColor: Colors.green,
   fontWeight: 'bold',
+  marginBottom: '1rem',
 };
 
 export const addButtonStyles: SxProps = {
-  marginTop: '1rem',
   backgroundColor: Colors.blue,
   fontWeight: 'bold',
+};
+
+export const titleText: SxProps = {
+  fontSize: '1.4rem',
+  padding: '0.4rem',
+  fontWeight: 'bold',
+  marginBottom: '2rem',
+  backgroundColor: Colors.main,
 };

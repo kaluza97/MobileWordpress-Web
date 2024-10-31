@@ -3,16 +3,13 @@ import { SxProps } from '@mui/material';
 
 export const container: SxProps = {
   display: 'flex',
-  flex: 1,
-  height: '50rem',
-  padding: '1rem',
-  backgroundColor: Colors.background,
   flexDirection: 'column',
-  overflowY: 'scroll',
 };
 
 export const titleText: SxProps = {
-  fontSize: '1.6rem',
+  fontSize: '1.4rem',
+  padding: '0.4rem',
   fontWeight: 'bold',
-  marginBottom: '1rem',
+  marginBottom: '2rem',
+  backgroundColor: Colors.main,
 };

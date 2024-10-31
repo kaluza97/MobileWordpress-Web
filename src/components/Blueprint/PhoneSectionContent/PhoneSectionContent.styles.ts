@@ -18,14 +18,13 @@ export const iconText: SxProps = {
   fontWeight: 'bold',
   color: Colors.blue,
   padding: '0.4rem',
-  cursor: 'pointer'
+  cursor: 'pointer',
 };
 
 export const text: SxProps = {
   fontSize: '0.8rem',
   fontWeight: 'bold',
   padding: '0.4rem',
-  color: Colors.orange,
-  cursor: 'default'
-
+  color: Colors.green,
+  cursor: 'default',
 };
