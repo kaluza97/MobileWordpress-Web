@@ -1,6 +1,7 @@
 'use client';
 import {
   Box,
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -14,10 +15,14 @@ import { AccordionContext } from '@/context/AccordionMenu/AccordionMenu';
 import { navigationIcons } from '@/constants/NavigationIcons';
 import {
   container,
+  removeButtonStyles,
   sectionText,
   selectContainer,
 } from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm.styles';
-import { HandleChange, NavigationFormProps } from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm.types';
+import {
+  HandleChange,
+  NavigationFormProps,
+} from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm.types';
 
 export const NavigationForm: FC<NavigationFormProps> = ({
   values,
@@ -36,6 +41,13 @@ export const NavigationForm: FC<NavigationFormProps> = ({
       return updatedValues;
     });
   };
+
+  const removeSection = (index: number) =>
+    setFormValues((prevValues) => {
+      const newValues = [...prevValues];
+      newValues.splice(index, 1);
+      return newValues;
+    });
 
   return (
     <Box sx={container}>
@@ -96,6 +108,13 @@ export const NavigationForm: FC<NavigationFormProps> = ({
           ))}
         </Select>
       </FormControl>
+      <Button
+        onClick={() => removeSection(index)}
+        variant="contained"
+        sx={removeButtonStyles}
+      >
+        Delete Section
+      </Button>
     </Box>
   );
 };

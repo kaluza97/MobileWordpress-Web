@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Box, Button } from '@mui/material';
 import {
   addButtonStyles,
@@ -9,28 +9,31 @@ import {
 import { NavigationForm } from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm';
 import { FormValues } from '@/services/Settings/fetchSettings.types';
 import CheckIcon from '@mui/icons-material/Check';
-import { fetchNavigation, fetchSaveNavigation } from '@/services/Settings/fetchSettings';
+import {
+  fetchNavigation,
+  fetchSaveNavigation,
+} from '@/services/Settings/fetchSettings';
+import { MessageContext } from '@/context/Messages/Message';
+import { MessageType } from '@/context/Messages/Message.types';
 
 const MAX_SECTIONS = 6;
 
 export const Navigation = () => {
+  const { setMessage } = useContext(MessageContext);
   const initialMenuObject: FormValues = { name: '', icon: '', view: '' };
-  const [formValues, setFormValues] = useState<Array<FormValues>>([initialMenuObject]);
-
+  const [formValues, setFormValues] = useState<Array<FormValues>>([
+    initialMenuObject,
+  ]);
 
   useEffect(() => {
     const fetchData = async () => {
       const navigationData = await fetchNavigation();
-      setFormValues(navigationData.length ? navigationData : [initialMenuObject]);
+      setFormValues(
+        navigationData.length ? navigationData : [initialMenuObject]
+      );
     };
     fetchData();
   }, []);
-
-
-  useEffect(() => {
-    console.log(formValues, 'formValues')
-  }, [formValues]);
-
 
   const addSection = () => {
     if (formValues.length < MAX_SECTIONS) {
@@ -40,10 +43,10 @@ export const Navigation = () => {
 
   const handleConfirm = async () => {
     try {
-      const savedData = await fetchSaveNavigation(formValues);
-      console.log('Navigation updated successfully:', savedData);
+      await fetchSaveNavigation(formValues);
+      setMessage('Navigation updated successfully!', MessageType.Success);
     } catch (error) {
-      console.error('Error updating navigation:', error);
+      setMessage('Error updating navigation.', MessageType.Error);
     }
   };
 

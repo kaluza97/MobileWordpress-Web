@@ -1,3 +1,4 @@
+import { Colors } from '@/variables/Colors';
 import { SxProps } from '@mui/material';
 
 export const container: SxProps = {
@@ -16,5 +17,11 @@ export const sectionText: SxProps = {
   marginTop: '2rem',
   marginBottom: '1rem',
   fontSize: '1.6rem',
+  fontWeight: 'bold',
+};
+
+export const removeButtonStyles: SxProps = {
+  marginTop: '1rem',
+  backgroundColor: Colors.orange,
   fontWeight: 'bold',
 };

@@ -17,6 +17,6 @@ export const checkButtonStyles: SxProps = {
 
 export const addButtonStyles: SxProps = {
   marginTop: '1rem',
-  backgroundColor: Colors.orange,
+  backgroundColor: Colors.blue,
   fontWeight: 'bold',
 };
