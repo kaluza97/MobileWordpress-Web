@@ -12,12 +12,7 @@ export const fetchNavigation = async (): Promise<Array<FormValues>> => {
   try {
     const response = await fetch(endpoint);
     const data = await response.json();
-
-    const combinedNavigation = Array.isArray(data)
-      ? data.flatMap((item) => item.navigation).filter(Boolean)
-      : [];
-
-    return combinedNavigation;
+    return data.navigation;
   } catch (error) {
     console.error('Error fetching data api/navigation:', error);
     throw error;
