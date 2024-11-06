@@ -1,10 +1,11 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { DragEndEvent } from '@dnd-kit/core';
 import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 import { MessageContext } from '@/context/Messages/Message';
 import { MessageType } from '@/context/Messages/Message.types';
-import { DraggableComponentType } from '@/components/DragAndDrop/DragAndDrop.types';
+import { DraggableComponentNames, DraggableComponentType } from '@/components/DragAndDrop/DragAndDrop.types';
 import { DroppedItemsState } from '@/hooks/useDragAndDrop.types';
+import { fetchNavigation } from '@/services/Settings/fetchSettings';
 
 export const useDragAndDrop = () => {
   const [droppedItems, setDroppedItems] = useState<DroppedItemsState>({
@@ -44,10 +45,24 @@ export const useDragAndDrop = () => {
     }));
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const navigationData = await fetchNavigation();
+      if (navigationData.length) {
+        setDroppedItems((prevItems) => ({
+          ...prevItems,
+          navigationState: DraggableComponentNames.Navigation,
+        }));
+      };
+    }
+    fetchData();
+  }, []);
+
   const handleDragEnd = ({ over, active }: DragEndEvent) => {
     const droppedItem = active?.data?.current?.name;
     const droppedItemType = active?.data?.current?.type;
     const acceptType = over?.data?.current?.accepts;
+
 
     if (acceptType === droppedItemType) {
       switch (droppedItemType) {

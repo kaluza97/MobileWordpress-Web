@@ -3,3 +3,11 @@ export enum DraggableComponentType {
   Header = 'HEADER_DRAGGABLE',
   Content = 'CONTENT_DRAGGABLE',
 }
+
+
+export enum DraggableComponentNames {
+  Navigation = 'Navigation',
+  Header = 'Header',
+  BurgerMenu = 'Burger Menu',
+  Content = 'Content',
+}
