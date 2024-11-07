@@ -5,6 +5,6 @@ export const addButtonStyles: SxProps = {
 };
 
 export const titleText: SxProps = {
-  fontSize: '1.6rem',
+  fontSize: '1.4rem',
   fontWeight: 'bold',
 };

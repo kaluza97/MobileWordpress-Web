@@ -5,7 +5,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import { iconContainer } from '@/components/AccordionMenu/EditableAccordionMenu/ActionButtons/ActionButtons.styles';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import {
+  iconButton,
+  iconContainer,
+} from '@/components/AccordionMenu/EditableAccordionMenu/ActionButtons/ActionButtons.styles';
 import { ActionButtonsType } from '@/components/AccordionMenu/EditableAccordionMenu/ActionButtons/ActionButtons.types';
 import { AccordionContext } from '@/context/AccordionMenu/AccordionMenu';
 import { MessageContext } from '@/context/Messages/Message';
@@ -57,20 +61,24 @@ export const ActionButtons = ({ _id, name }: ActionButtonsType) => {
           <IconButton
             onClick={() => handleSaveEdit(_id)}
             disabled={!editedItem}
+            sx={iconButton}
           >
             <CheckIcon />
           </IconButton>
-          <IconButton onClick={cancelEditMode}>
+          <IconButton onClick={cancelEditMode} sx={iconButton}>
             <CloseIcon />
           </IconButton>
         </Box>
       ) : (
         <Box sx={iconContainer}>
-          <IconButton onClick={() => toggleEditMode(_id, name)}>
+          <IconButton onClick={() => toggleEditMode(_id, name)} sx={iconButton}>
             <EditIcon />
           </IconButton>
-          <IconButton onClick={() => handleRemoveItem(_id)}>
+          <IconButton onClick={() => handleRemoveItem(_id)} sx={iconButton}>
             <DeleteIcon />
+          </IconButton>
+          <IconButton sx={iconButton}>
+            <VisibilityIcon />
           </IconButton>
         </Box>
       )}
