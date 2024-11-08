@@ -7,9 +7,10 @@ import { DndContext, rectIntersection } from '@dnd-kit/core';
 import { Box } from '@mui/material';
 import { container } from '@/app/page.styles';
 import { Message } from '@/components/Messages/Message';
+import { TitleBox } from '@/components/TitleBox/TitleBox';
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
 
-export default function Home() {
+export default function ViewPage({ params: { view } }) {
   const {
     droppedItems,
     handleDragEnd,
@@ -21,6 +22,7 @@ export default function Home() {
   return (
     <DndContext onDragEnd={handleDragEnd} collisionDetection={rectIntersection}>
       <Header />
+      <TitleBox title={`Blueprint : ${view}`} />
       <Message />
       <Box sx={container}>
         <Sidebar />
@@ -29,7 +31,7 @@ export default function Home() {
           clearHeaderSection={clearHeaderSection}
           clearContentSection={clearContentSection}
           clearNavigationSection={clearNavigationSection}
-          isNavigationHidden={false}
+          isNavigationHidden={true}
         />
         <SettingsMenu />
       </Box>

@@ -9,7 +9,6 @@ export const container: SxProps = {
   width: '100%',
   height: '100%',
   backgroundColor: Colors.main,
-  borderRadius: '0 0 25px 25px',
   opacity: 0.8,
 };
 
