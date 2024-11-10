@@ -13,3 +13,4 @@ export const titleText: SxProps = {
   marginBottom: '2rem',
   backgroundColor: Colors.main,
 };
+

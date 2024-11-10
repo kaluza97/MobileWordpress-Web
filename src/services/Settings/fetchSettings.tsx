@@ -19,6 +19,18 @@ export const fetchNavigation = async (): Promise<Array<FormValues>> => {
   }
 };
 
+export const fetchHeader = async (): Promise<Array<FormValues>> => {
+  try {
+    const response = await fetch(endpoint);
+    const data = await response.json();
+    return data.header;
+  } catch (error) {
+    console.error('Error fetching data api/header:', error);
+    throw error;
+  }
+};
+
+
 
 export const fetchSaveNavigation = async (navigationData: Array<FormValues>) => {
   const request = await fetch(endpoint, {

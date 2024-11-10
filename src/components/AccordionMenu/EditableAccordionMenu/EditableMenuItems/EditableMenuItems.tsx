@@ -12,11 +12,13 @@ import {
 import { AccordionContext } from '@/context/AccordionMenu/AccordionMenu';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useRouter } from 'next/navigation';
+import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 
 export const EditableMenuItems = () => {
   const router = useRouter();
   const { editedItem, setEditedItem, editMode, views } =
     useContext(AccordionContext);
+  const { closeSettingsMenu } = useContext(SettingsMenuContext);
 
   const onEditItemChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEditedItem(event.target.value);
@@ -24,6 +26,7 @@ export const EditableMenuItems = () => {
 
   const handleNavigate = () => {
     router.push(`/`);
+    closeSettingsMenu();
   };
 
   return (

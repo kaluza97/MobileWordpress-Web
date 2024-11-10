@@ -9,6 +9,7 @@ export type SettingsMenuItem = {
 export interface SettingsMenuContextType {
   activeSettingsMenu: SettingsMenuItem;
   setActiveSettingsMenu: Dispatch<SetStateAction<SettingsMenuItem>>;
+  closeSettingsMenu: () => void;
 }
 
 export interface SettingsMenuContextProviderProps {

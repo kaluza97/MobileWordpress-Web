@@ -10,7 +10,12 @@ import { Message } from '@/components/Messages/Message';
 import { TitleBox } from '@/components/TitleBox/TitleBox';
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
 
-export default function ViewPage({ params: { view } }) {
+interface ViewPageProps {
+  params: {
+    view: string;
+  };
+}
+export default function ViewPage({ params: { view } }: ViewPageProps) {
   const {
     droppedItems,
     handleDragEnd,

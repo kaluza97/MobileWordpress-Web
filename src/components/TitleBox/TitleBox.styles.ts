@@ -12,7 +12,7 @@ export const container: SxProps = {
 
 export const titleText: SxProps = {
   color: Colors.black,
-  fontSize: '2rem',
+  fontSize: '1.4rem',
   fontWeight: 'bold',
   textAlign: 'center',
 };

@@ -15,14 +15,14 @@ export const PhoneSectionContent: FC<PhoneSectionContentProps> = ({
   itemType,
   removeDroppedItem,
 }) => {
-  const { setActiveSettingsMenu } = useContext(SettingsMenuContext);
+  const { setActiveSettingsMenu, closeSettingsMenu } = useContext(SettingsMenuContext);
 
   const handleActiveSetting = () => {
     setActiveSettingsMenu({ type: itemType, name: itemName });
   };
 
   const handleClearElement = () => {
-    setActiveSettingsMenu({ type: null, name: '' });
+    closeSettingsMenu();
     removeDroppedItem();
   };
 
