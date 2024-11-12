@@ -20,12 +20,26 @@ export const fetchHeader = async (): Promise<Array<HeaderObjectType>> => {
 };
 
 export const saveHeader = async (headerData: Array<HeaderObjectType>) => {
-  const request = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ header: headerData }),
-  });
+  try {
+    const request = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ header: headerData }),
+    });
 
-  const result = await request.json();
-  return result;
+    const result = await request.json();
+    return result;
+  } catch (error) {
+    console.error('Error saveing header:', error);
+  }
+};
+
+export const clearHeaderByViewId = async (viewId: string) => {
+  try {
+    const headerData = await fetchHeader();
+    const updatedHeader = headerData.filter((item) => item.viewId !== viewId);
+    await saveHeader(updatedHeader);
+  } catch (error) {
+    console.error('Error clearing header:', error);
+  }
 };

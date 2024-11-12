@@ -8,7 +8,9 @@ if (!endpoint) {
   );
 }
 
-export const fetchNavigation = async (): Promise<Array<NavigationObjectType>> => {
+export const fetchNavigation = async (): Promise<
+  Array<NavigationObjectType>
+> => {
   try {
     const response = await fetch(endpoint);
     const data = await response.json();
@@ -19,15 +21,36 @@ export const fetchNavigation = async (): Promise<Array<NavigationObjectType>> =>
   }
 };
 
+export const saveNavigation = async (
+  navigationData: Array<NavigationObjectType>
+) => {
+  try {
+    const request = await fetch(endpoint, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ navigation: navigationData }),
+    });
 
-export const saveNavigation = async (navigationData: Array<NavigationObjectType>) => {
-  const request = await fetch(endpoint, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ navigation: navigationData }),
-  });
-
-  const result = await request.json();
-  return result;
+    const result = await request.json();
+    return result;
+  } catch (error) {
+    console.error('Error updating navigation:', error);
+    throw error;
+  }
 };
 
+export const clearNavigation = async () => {
+  try {
+    const request = await fetch(endpoint, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ navigation: [] }),
+    });
+
+    const result = await request.json();
+    return result;
+  } catch (error) {
+    console.error('Error clearing navigation:', error);
+    throw error;
+  }
+};

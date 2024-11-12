@@ -18,12 +18,12 @@ export const Header = () => {
   const pathname = usePathname();
   const { setMessage } = useContext(MessageContext);
   const { activeSettingsMenu } = useContext(SettingsMenuContext);
-  const viewIdUrl = pathname.replace('/view/', '');
+  const getViewIdFromUrl = pathname.replace('/view/', '');
   const [headerItems, setHeaderItems] = useState<Array<HeaderObjectType>>([]);
   const [headerTitle, setHeaderTitle] = useState('');
 
   const findHeaderByViewId = (headerData: Array<HeaderObjectType>) => {
-    return headerData.find((item) => item.viewId === viewIdUrl);
+    return headerData.find((item) => item.viewId === getViewIdFromUrl);
   };
 
   useEffect(() => {
@@ -40,13 +40,12 @@ export const Header = () => {
     const newTitle = event.target.value;
     setHeaderTitle(newTitle);
 
-    const currentItem = { viewId: viewIdUrl, title: headerTitle };
-
+    const currentItem = { viewId: getViewIdFromUrl, title: headerTitle };
     const existingItem = findHeaderByViewId(headerItems);
 
     const updatedItems = existingItem
       ? headerItems.map((item) =>
-          item.viewId === viewIdUrl ? { ...item, title: newTitle } : item
+          item.viewId === getViewIdFromUrl ? { ...item, title: newTitle } : item
         )
       : [...headerItems, currentItem];
 
