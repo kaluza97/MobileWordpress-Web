@@ -12,7 +12,6 @@ export const fetchHeader = async (): Promise<Array<HeaderObjectType>> => {
   try {
     const response = await fetch(endpoint);
     const data = await response.json();
-    console.log(data.header);
     return data.header;
   } catch (error) {
     console.error('Error fetching data api/header:', error);
@@ -22,7 +21,7 @@ export const fetchHeader = async (): Promise<Array<HeaderObjectType>> => {
 
 export const saveHeader = async (headerData: Array<HeaderObjectType>) => {
   const request = await fetch(endpoint, {
-    method: 'PATCH',
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ header: headerData }),
   });
@@ -30,4 +29,3 @@ export const saveHeader = async (headerData: Array<HeaderObjectType>) => {
   const result = await request.json();
   return result;
 };
-
