@@ -7,12 +7,11 @@ export const container: SxProps = {
   justifyContent: 'center',
   flex: 1,
   backgroundColor: Colors.background,
-  padding: '20px',
+  padding: '0.5rem',
 };
 
 export const titleText: SxProps = {
   color: Colors.black,
   fontSize: '1.4rem',
-  fontWeight: 'bold',
   textAlign: 'center',
 };

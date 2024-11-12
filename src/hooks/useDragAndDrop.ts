@@ -5,7 +5,7 @@ import { MessageContext } from '@/context/Messages/Message';
 import { MessageType } from '@/context/Messages/Message.types';
 import { DraggableComponentNames, DraggableComponentType } from '@/components/DragAndDrop/DragAndDrop.types';
 import { DroppedItemsState } from '@/hooks/useDragAndDrop.types';
-import { fetchNavigation } from '@/services/Settings/fetchSettings';
+import { fetchNavigation } from '@/services/Settings/fetchNavigation';
 
 export const useDragAndDrop = () => {
   const [droppedItems, setDroppedItems] = useState<DroppedItemsState>({

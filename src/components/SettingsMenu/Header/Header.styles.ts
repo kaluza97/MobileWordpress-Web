@@ -14,3 +14,8 @@ export const titleText: SxProps = {
   backgroundColor: Colors.main,
 };
 
+export const checkButtonStyles: SxProps = {
+  backgroundColor: Colors.green,
+  fontWeight: 'bold',
+  marginBottom: '1rem',
+};

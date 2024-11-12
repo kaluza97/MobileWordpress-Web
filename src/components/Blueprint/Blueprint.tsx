@@ -21,6 +21,7 @@ import {
   phoneContent,
 } from '@/components/Blueprint/Blueprint.styles';
 import { PhoneSectionContent } from '@/components/Blueprint/PhoneSectionContent/PhoneSectionContent';
+import { Fragment } from 'react';
 
 export const Blueprint = ({
   droppedItems,
@@ -82,9 +83,9 @@ export const Blueprint = ({
               removeFunction,
               isNavigationHidden,
             }) => (
-              <>
+              <Fragment key={title}>
                 {!isNavigationHidden && (
-                  <Box sx={{ ...sx, borderRadius }} key={title}>
+                  <Box sx={{ ...sx, borderRadius }}>
                     <Droppable
                       sectionName={title}
                       item={item}
@@ -101,7 +102,7 @@ export const Blueprint = ({
                     </Droppable>
                   </Box>
                 )}
-              </>
+              </Fragment>
             )
           )}
         </Box>
