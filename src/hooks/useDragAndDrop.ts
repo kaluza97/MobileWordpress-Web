@@ -63,8 +63,8 @@ export const useDragAndDrop = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const headerData = await fetchHeader();
       const navigationData = await fetchNavigation();
+      const headerData = await fetchHeader();
       const headerItem = headerData.find(
         (item) => item.viewId === getViewIdFromUrl
       );
