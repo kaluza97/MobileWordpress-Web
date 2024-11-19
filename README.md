@@ -1,6 +1,8 @@
 ## Możesz sprawdzić aplikację na serwerze Vercel:
 
 https://mobile-wordpress-web.vercel.app/
+
+
 <img width="1440" alt="1" src="https://github.com/user-attachments/assets/3632ab98-f214-4b0b-8a26-2163e0930a15">
 <img width="1440" alt="2" src="https://github.com/user-attachments/assets/d2d9ea0a-c1c4-42ed-bbd2-a6db03ecd102">
 
