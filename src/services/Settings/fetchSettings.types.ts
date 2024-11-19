@@ -18,7 +18,6 @@ export const FormValuesSchema = z.object({
   view: z.string(),
 });
 
-
 export const NavigationSchema = z.object({
   name: z.string(),
   icon: z.string(),
@@ -30,4 +29,3 @@ export const SettingsSchema = z.object({
   content: z.array(z.unknown()),
   navigation: z.array(NavigationSchema),
 });
-

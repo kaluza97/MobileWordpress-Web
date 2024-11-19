@@ -4,7 +4,6 @@ export enum DraggableComponentType {
   Content = 'CONTENT_DRAGGABLE',
 }
 
-
 export enum DraggableComponentNames {
   Navigation = 'Navigation',
   Header = 'Header',

@@ -25,7 +25,7 @@ export const SettingsMenu = () => {
       default:
         return (
           <Typography>
-            Inactive settings. Please choose one of the "Components" and drag to
+            Inactive settings. Please choose one of the COMPONENTS and drag to
             phone section. After dragging the appropriate section, click on it
             to open the Settings menu
           </Typography>

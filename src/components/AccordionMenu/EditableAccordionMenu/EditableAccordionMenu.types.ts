@@ -1,4 +1,4 @@
 export interface EditableAccordionMenuType {
-    title: string;
-    isElementDraggable?: boolean;
+  title: string;
+  isElementDraggable?: boolean;
 }

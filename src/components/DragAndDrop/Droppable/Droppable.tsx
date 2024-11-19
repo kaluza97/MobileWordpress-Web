@@ -35,8 +35,9 @@ export const Droppable = ({
       {item ? (
         children
       ) : (
-        <Typography>{isOver ?
-          <Typography>Drop Here</Typography> : sectionName}</Typography>
+        <Typography>
+          {isOver ? <Typography>Drop Here</Typography> : sectionName}
+        </Typography>
       )}
     </Box>
   );

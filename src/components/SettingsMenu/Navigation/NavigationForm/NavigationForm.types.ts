@@ -10,5 +10,11 @@ export interface NavigationFormProps {
 }
 
 export interface HandleChange {
-  (name: keyof FormValues): (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => void;
+  (
+    name: keyof FormValues
+  ): (
+    event:
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | SelectChangeEvent<string>
+  ) => void;
 }

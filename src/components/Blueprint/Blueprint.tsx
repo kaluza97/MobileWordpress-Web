@@ -4,7 +4,10 @@ import { CardMedia } from '@mui/material';
 import Image from 'next/image';
 import { Droppable } from '@/components/DragAndDrop/Droppable/Droppable';
 import Smartphone from '/public/phone.png';
-import { DraggableComponentNames, DraggableComponentType } from '@/components/DragAndDrop/DragAndDrop.types';
+import {
+  DraggableComponentNames,
+  DraggableComponentType,
+} from '@/components/DragAndDrop/DragAndDrop.types';
 import { BlueprintProps } from '@/components/Blueprint/Blueprint.types';
 import {
   container,
@@ -23,7 +26,6 @@ export const Blueprint = ({
   clearNavigationSection,
 }: BlueprintProps) => {
   const { headerState, contentState, navigationState } = droppedItems;
-
 
   const BlueprintSections = [
     {

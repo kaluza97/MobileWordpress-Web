@@ -19,8 +19,9 @@ export const fetchNavigation = async (): Promise<Array<FormValues>> => {
   }
 };
 
-
-export const fetchSaveNavigation = async (navigationData: Array<FormValues>) => {
+export const fetchSaveNavigation = async (
+  navigationData: Array<FormValues>
+) => {
   const request = await fetch(endpoint, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
