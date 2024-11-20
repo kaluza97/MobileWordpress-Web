@@ -1,5 +1,6 @@
 ## The application is in its initial phase. Currently, we can generate Navigation in the mobile application.
 
+## Only for desktop, no RWD!
 
 ## You can check the application on the Vercel server:
 
