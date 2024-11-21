@@ -45,8 +45,8 @@ export const Header = () => {
 
     const updatedItems = existingItem
       ? headerItems.map((item) =>
-          item.viewId === getViewIdFromUrl ? { ...item, title: newTitle } : item
-        )
+        item.viewId === getViewIdFromUrl ? { ...item, title: newTitle } : item
+      )
       : [...headerItems, currentItem];
 
     setHeaderItems(updatedItems);
@@ -56,7 +56,7 @@ export const Header = () => {
     try {
       await saveHeader(headerItems);
       setMessage('Header updated successfully!', MessageType.Success);
-    } catch (error) {
+    } catch {
       setMessage('Error updating header.', MessageType.Error);
     }
   };
