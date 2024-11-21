@@ -12,6 +12,7 @@ export const fetchViews = async (): Promise<ViewType> => {
   try {
     const response = await fetch(endpoint);
     const data = await response.json();
+    console.log(data)
     return ViewSchema.parse(data);
   } catch (error) {
     console.error('Error fetching data api/views:', error);

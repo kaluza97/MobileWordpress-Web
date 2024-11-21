@@ -48,7 +48,7 @@ export const Navigation = () => {
     try {
       await saveNavigation(navigationItems);
       setMessage('Navigation updated successfully!', MessageType.Success);
-    } catch (error) {
+    } catch {
       setMessage('Error updating navigation.', MessageType.Error);
     }
   };
