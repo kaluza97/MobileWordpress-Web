@@ -43,7 +43,7 @@ export const EditableAccordionMenu = ({ title }: EditableAccordionMenuType) => {
       const data = await fetchAddItem(newItem);
       setViews([...views, { _id: data._id, name: data.name }]);
       setNewItem('');
-    } catch (error) {
+    } catch {
       setMessage('Failed to add item. Please try again later.', MessageType.Error);
     }
   };

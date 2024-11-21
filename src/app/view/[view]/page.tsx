@@ -9,7 +9,6 @@ import { container } from '@/app/page.styles';
 import { Message } from '@/components/Messages/Message';
 import { TitleBox } from '@/components/TitleBox/TitleBox';
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
-import { useRouter } from 'next/router';
 
 interface ViewPageProps {
   params: {
