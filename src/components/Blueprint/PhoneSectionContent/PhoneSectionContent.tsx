@@ -10,19 +10,19 @@ import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 import { PhoneSectionContentProps } from '@/components/Blueprint/PhoneSectionContent/PhoneSectionContent.types';
 
 export const PhoneSectionContent: FC<PhoneSectionContentProps> = ({
-  borderRadius = '0',
+  borderRadius,
   itemName,
   itemType,
   removeDroppedItem,
 }) => {
-  const { setActiveSettingsMenu } = useContext(SettingsMenuContext);
+  const { setActiveSettingsMenu, closeSettingsMenu } = useContext(SettingsMenuContext);
 
   const handleActiveSetting = () => {
     setActiveSettingsMenu({ type: itemType, name: itemName });
   };
 
   const handleClearElement = () => {
-    setActiveSettingsMenu({ type: null, name: '' });
+    closeSettingsMenu();
     removeDroppedItem();
   };
 

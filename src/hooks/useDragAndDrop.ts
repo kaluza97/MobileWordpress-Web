@@ -8,19 +8,30 @@ import {
   DraggableComponentType,
 } from '@/components/DragAndDrop/DragAndDrop.types';
 import { DroppedItemsState } from '@/hooks/useDragAndDrop.types';
-import { fetchNavigation } from '@/services/Settings/fetchSettings';
+import {
+  clearNavigation,
+  fetchNavigation,
+} from '@/services/Settings/fetchNavigation';
+import {
+  clearHeaderByViewId,
+  fetchHeader,
+} from '@/services/Settings/fetchHeader';
+import { usePathname } from 'next/navigation';
 
 export const useDragAndDrop = () => {
+  const pathname = usePathname();
+  const getViewIdFromUrl = pathname.replace('/view/', '');
   const [droppedItems, setDroppedItems] = useState<DroppedItemsState>({
     headerState: '',
     contentState: '',
     navigationState: '',
   });
-  const { setActiveSettingsMenu } = useContext(SettingsMenuContext);
+
+  const { closeSettingsMenu } = useContext(SettingsMenuContext);
   const { setMessage, clearMessage } = useContext(MessageContext);
 
   const handleInvalidDrop = (droppedItemType: string, acceptType: string) => {
-    setActiveSettingsMenu({ type: null, name: '' });
+    closeSettingsMenu();
     setMessage(
       `Invalid drop: ${droppedItemType} cannot be placed in ${acceptType} area.`,
       MessageType.Error
@@ -32,6 +43,7 @@ export const useDragAndDrop = () => {
       ...prevItems,
       headerState: '',
     }));
+    clearHeaderByViewId(getViewIdFromUrl);
   };
 
   const clearContentSection = () => {
@@ -46,11 +58,24 @@ export const useDragAndDrop = () => {
       ...prevItems,
       navigationState: '',
     }));
+    clearNavigation();
   };
 
   useEffect(() => {
     const fetchData = async () => {
       const navigationData = await fetchNavigation();
+      const headerData = await fetchHeader();
+      const headerItem = headerData.find(
+        (item) => item.viewId === getViewIdFromUrl
+      );
+
+      if (headerItem) {
+        setDroppedItems((prevItems) => ({
+          ...prevItems,
+          headerState: DraggableComponentNames.Header,
+        }));
+      }
+
       if (navigationData.length) {
         setDroppedItems((prevItems) => ({
           ...prevItems,

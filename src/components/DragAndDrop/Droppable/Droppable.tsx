@@ -13,7 +13,7 @@ export const Droppable = ({
   type,
   sectionName,
   id,
-  borderRadius = '0px',
+  borderRadius,
 }: DroppableProps) => {
   const { isOver, setNodeRef } = useDroppable({
     id: id,

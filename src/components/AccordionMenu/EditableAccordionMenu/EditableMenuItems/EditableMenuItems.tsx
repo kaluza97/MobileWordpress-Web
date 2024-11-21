@@ -11,20 +11,29 @@ import {
 } from '@/components/AccordionMenu/EditableAccordionMenu/EditableMenuItems/EditableMenuItems.styles';
 import { AccordionContext } from '@/context/AccordionMenu/AccordionMenu';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { useRouter } from 'next/navigation';
+import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 
 export const EditableMenuItems = () => {
+  const router = useRouter();
   const { editedItem, setEditedItem, editMode, views } =
     useContext(AccordionContext);
+  const { closeSettingsMenu } = useContext(SettingsMenuContext);
 
   const onEditItemChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEditedItem(event.target.value);
+  };
+
+  const handleNavigate = () => {
+    router.push(`/`);
+    closeSettingsMenu();
   };
 
   return (
     <Box sx={container}>
       <Box sx={viewContainer}>
         <Typography sx={text}>MAIN VIEW</Typography>
-        <IconButton sx={iconButton}>
+        <IconButton sx={iconButton} onClick={() => handleNavigate()}>
           <VisibilityIcon />
         </IconButton>
       </Box>

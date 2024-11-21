@@ -39,21 +39,19 @@ const phoneSection: SxProps = {
 
 export const header: SxProps = {
   ...phoneSection,
-  height: '10%',
+  flex: 1,
   backgroundColor: Colors.green,
-  borderRadius: '25px 25px 0 0',
 };
 
 export const content: SxProps = {
   ...phoneSection,
-  height: '80%',
+  flex: 8,
   backgroundColor: Colors.orange,
   overflowY: 'auto',
 };
 
 export const navigation: SxProps = {
   ...phoneSection,
-  height: '10%',
+  flex: 1,
   backgroundColor: Colors.blue,
-  borderRadius: '0 0 25px 25px',
 };

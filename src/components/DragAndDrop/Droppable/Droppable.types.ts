@@ -7,5 +7,5 @@ export interface DroppableProps {
   type: DraggableComponentType;
   sectionName: string;
   id: string;
-  borderRadius?: string;
+  borderRadius: string;
 }

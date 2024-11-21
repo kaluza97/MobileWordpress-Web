@@ -15,11 +15,20 @@ import { AccordionContext } from '@/context/AccordionMenu/AccordionMenu';
 import { MessageContext } from '@/context/Messages/Message';
 import { MessageType } from '@/context/Messages/Message.types';
 import { fetchSaveEdit, fetchRemoveItem } from '@/services/Views/fetchViews';
+import { useRouter } from 'next/navigation';
+import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
 
 export const ActionButtons = ({ _id, name }: ActionButtonsType) => {
+  const router = useRouter();
   const { editedItem, setEditedItem, editMode, setEditMode, views, setViews } =
     useContext(AccordionContext);
   const { setMessage } = useContext(MessageContext);
+  const { closeSettingsMenu } = useContext(SettingsMenuContext);
+
+  const handleNavigate = (name: string) => {
+    router.push(`/view/${name}`);
+    closeSettingsMenu();
+  };
 
   const handleSaveEdit = async (id: string) => {
     if (editedItem) {
@@ -77,7 +86,7 @@ export const ActionButtons = ({ _id, name }: ActionButtonsType) => {
           <IconButton onClick={() => handleRemoveItem(_id)} sx={iconButton}>
             <DeleteIcon />
           </IconButton>
-          <IconButton sx={iconButton}>
+          <IconButton sx={iconButton} onClick={() => handleNavigate(name)}>
             <VisibilityIcon />
           </IconButton>
         </Box>

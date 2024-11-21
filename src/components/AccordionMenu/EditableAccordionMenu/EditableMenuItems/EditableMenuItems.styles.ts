@@ -3,12 +3,13 @@ import { SxProps } from '@mui/material';
 
 export const container: SxProps = {
   marginTop: '2rem',
-  width: '20rem',
+  width: '18rem',
 };
 
 export const viewContainer: SxProps = {
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'space-between',
   width: '100%',
   marginTop: '2rem',
   backgroundColor: Colors.main,
@@ -29,7 +30,6 @@ export const textField: SxProps = {
 };
 
 export const text: SxProps = {
-  width: '80rem',
   marginLeft: '1rem',
   padding: '0.5rem',
 };

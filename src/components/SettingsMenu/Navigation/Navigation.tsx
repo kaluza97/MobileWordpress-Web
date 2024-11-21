@@ -8,12 +8,12 @@ import {
   titleText,
 } from '@/components/SettingsMenu/Navigation/Navigation.styles';
 import { NavigationForm } from '@/components/SettingsMenu/Navigation/NavigationForm/NavigationForm';
-import { FormValues } from '@/services/Settings/fetchSettings.types';
+import { NavigationObjectType } from '@/services/Settings/fetchSettings.types';
 import CheckIcon from '@mui/icons-material/Check';
 import {
   fetchNavigation,
-  fetchSaveNavigation,
-} from '@/services/Settings/fetchSettings';
+  saveNavigation,
+} from '@/services/Settings/fetchNavigation';
 import { MessageContext } from '@/context/Messages/Message';
 import { MessageType } from '@/context/Messages/Message.types';
 import { SettingsMenuContext } from '@/context/SettingsMenu/SettingsMenu';
@@ -23,15 +23,15 @@ const MAX_SECTIONS = 6;
 export const Navigation = () => {
   const { setMessage } = useContext(MessageContext);
   const { activeSettingsMenu } = useContext(SettingsMenuContext);
-  const initialMenuObject: FormValues = { name: '', icon: '', view: '' };
-  const [formValues, setFormValues] = useState<Array<FormValues>>([
+  const initialMenuObject: NavigationObjectType = { name: '', icon: '', view: '' };
+  const [navigationItems, setNavigationItems] = useState<Array<NavigationObjectType>>([
     initialMenuObject,
   ]);
 
   useEffect(() => {
     const fetchData = async () => {
       const navigationData = await fetchNavigation();
-      setFormValues(
+      setNavigationItems(
         navigationData.length ? navigationData : [initialMenuObject]
       );
     };
@@ -39,14 +39,14 @@ export const Navigation = () => {
   }, []);
 
   const addSection = () => {
-    if (formValues.length < MAX_SECTIONS) {
-      setFormValues((prevValues) => [...prevValues, initialMenuObject]);
+    if (navigationItems.length < MAX_SECTIONS) {
+      setNavigationItems((prevValues) => [...prevValues, initialMenuObject]);
     }
   };
 
   const handleConfirm = async () => {
     try {
-      await fetchSaveNavigation(formValues);
+      await saveNavigation(navigationItems);
       setMessage('Navigation updated successfully!', MessageType.Success);
     } catch {
       setMessage('Error updating navigation.', MessageType.Error);
@@ -67,16 +67,16 @@ export const Navigation = () => {
       <Button
         onClick={addSection}
         variant="contained"
-        disabled={formValues.length >= MAX_SECTIONS}
+        disabled={navigationItems.length >= MAX_SECTIONS}
         sx={addButtonStyles}
       >
         Add Section
       </Button>
-      {formValues.map((item, id) => (
+      {navigationItems.map((item, id) => (
         <NavigationForm
           key={id}
           values={item}
-          setFormValues={setFormValues}
+          setFormValues={setNavigationItems}
           index={id}
           maxSections={MAX_SECTIONS}
         />

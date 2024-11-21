@@ -7,7 +7,8 @@ import {
 
 export const SettingsMenuContext = createContext<SettingsMenuContextType>({
   activeSettingsMenu: { type: null, name: '' },
-  setActiveSettingsMenu: () => {},
+  setActiveSettingsMenu: () => { },
+  closeSettingsMenu: () => { },
 });
 
 const SettingsMenuContextProvider = ({
@@ -16,9 +17,13 @@ const SettingsMenuContextProvider = ({
   const [activeSettingsMenu, setActiveSettingsMenu] =
     useState<SettingsMenuItem>({ type: null, name: '' });
 
+  const closeSettingsMenu = () => {
+    setActiveSettingsMenu({ type: null, name: '' })
+  }
+
   return (
     <SettingsMenuContext.Provider
-      value={{ activeSettingsMenu, setActiveSettingsMenu }}
+      value={{ activeSettingsMenu, setActiveSettingsMenu, closeSettingsMenu }}
     >
       {children}
     </SettingsMenuContext.Provider>

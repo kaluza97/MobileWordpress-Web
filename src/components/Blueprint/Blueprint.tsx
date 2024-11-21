@@ -8,7 +8,10 @@ import {
   DraggableComponentNames,
   DraggableComponentType,
 } from '@/components/DragAndDrop/DragAndDrop.types';
-import { BlueprintProps } from '@/components/Blueprint/Blueprint.types';
+import {
+  BlueprintProps,
+  BlueprintSectionsType,
+} from '@/components/Blueprint/Blueprint.types';
 import {
   container,
   content,
@@ -18,16 +21,20 @@ import {
   phoneContent,
 } from '@/components/Blueprint/Blueprint.styles';
 import { PhoneSectionContent } from '@/components/Blueprint/PhoneSectionContent/PhoneSectionContent';
+import { Fragment } from 'react';
 
 export const Blueprint = ({
   droppedItems,
   clearHeaderSection,
   clearContentSection,
   clearNavigationSection,
+  isNavigationHidden,
 }: BlueprintProps) => {
   const { headerState, contentState, navigationState } = droppedItems;
 
-  const BlueprintSections = [
+  const contentBorderRadius = isNavigationHidden ? '0 0 25px 25px' : '0';
+
+  const BlueprintSections: Array<BlueprintSectionsType> = [
     {
       sx: header,
       title: DraggableComponentNames.Header,
@@ -41,16 +48,17 @@ export const Blueprint = ({
       title: DraggableComponentNames.Content,
       item: contentState,
       type: DraggableComponentType.Content,
-      borderRadius: '0',
+      borderRadius: contentBorderRadius,
       removeFunction: clearContentSection,
     },
     {
+      sx: navigation,
       title: DraggableComponentNames.Navigation,
       item: navigationState,
       type: DraggableComponentType.Navigation,
-      sx: navigation,
       borderRadius: '0 0 25px 25px',
       removeFunction: clearNavigationSection,
+      isNavigationHidden: isNavigationHidden,
     },
   ];
 
@@ -66,23 +74,35 @@ export const Blueprint = ({
         />
         <Box sx={phoneContent}>
           {BlueprintSections.map(
-            ({ title, item, type, sx, borderRadius, removeFunction }) => (
-              <Box sx={sx} key={title}>
-                <Droppable
-                  sectionName={title}
-                  item={item}
-                  type={type}
-                  id={type}
-                  borderRadius={borderRadius}
-                >
-                  <PhoneSectionContent
-                    borderRadius={borderRadius}
-                    itemName={item}
-                    itemType={type}
-                    removeDroppedItem={removeFunction}
-                  />
-                </Droppable>
-              </Box>
+            ({
+              title,
+              item,
+              type,
+              sx,
+              borderRadius,
+              removeFunction,
+              isNavigationHidden,
+            }) => (
+              <Fragment key={title}>
+                {!isNavigationHidden && (
+                  <Box sx={{ ...sx, borderRadius }}>
+                    <Droppable
+                      sectionName={title}
+                      item={item}
+                      type={type}
+                      id={type}
+                      borderRadius={borderRadius}
+                    >
+                      <PhoneSectionContent
+                        borderRadius={borderRadius}
+                        itemName={item}
+                        itemType={type}
+                        removeDroppedItem={removeFunction}
+                      />
+                    </Droppable>
+                  </Box>
+                )}
+              </Fragment>
             )
           )}
         </Box>

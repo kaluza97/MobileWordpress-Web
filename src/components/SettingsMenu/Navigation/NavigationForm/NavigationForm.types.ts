@@ -1,20 +1,14 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
-import { FormValues } from '@/services/Settings/fetchSettings.types';
+import { NavigationObjectType } from '@/services/Settings/fetchSettings.types';
 import { SelectChangeEvent } from '@mui/material';
 
 export interface NavigationFormProps {
-  values: FormValues;
-  setFormValues: Dispatch<SetStateAction<Array<FormValues>>>;
+  values: NavigationObjectType;
+  setFormValues: Dispatch<SetStateAction<Array<NavigationObjectType>>>;
   index: number;
   maxSections: number;
 }
 
 export interface HandleChange {
-  (
-    name: keyof FormValues
-  ): (
-    event:
-      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      | SelectChangeEvent<string>
-  ) => void;
+  (name: keyof NavigationObjectType): (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => void;
 }
