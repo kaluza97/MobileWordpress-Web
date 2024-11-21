@@ -9,6 +9,7 @@ import { container } from '@/app/page.styles';
 import { Message } from '@/components/Messages/Message';
 import { TitleBox } from '@/components/TitleBox/TitleBox';
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
+import { useRouter } from 'next/router';
 
 interface ViewPageProps {
   params: {
@@ -23,11 +24,12 @@ export default function ViewPage({ params: { view } }: ViewPageProps) {
     clearContentSection,
     clearNavigationSection,
   } = useDragAndDrop();
+  const decodedView = decodeURIComponent(view);
 
   return (
     <DndContext onDragEnd={handleDragEnd} collisionDetection={rectIntersection}>
       <Header />
-      <TitleBox title={`Blueprint : ${view}`} />
+      <TitleBox title={`Blueprint : ${decodedView}`} />
       <Message />
       <Box sx={container}>
         <Sidebar />

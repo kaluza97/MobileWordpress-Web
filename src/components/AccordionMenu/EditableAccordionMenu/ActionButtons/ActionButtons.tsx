@@ -48,6 +48,7 @@ export const ActionButtons = ({ _id, name }: ActionButtonsType) => {
   const handleRemoveItem = async (id: string) => {
     await fetchRemoveItem(id);
     setViews(views.filter((item) => item._id !== id));
+    router.push(`/`);
   };
 
   const toggleEditMode = (id: string, name: string) => {

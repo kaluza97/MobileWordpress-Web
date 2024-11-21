@@ -28,12 +28,23 @@ export const EditableAccordionMenu = ({ title }: EditableAccordionMenuType) => {
   const { setMessage } = useContext(MessageContext);
 
   const handleAddItem = async () => {
-    if (newItem) {
+    if (!newItem) {
+      setMessage('New item cannot be empty', MessageType.Error);
+      return;
+    }
+
+    const isDuplicate = views.some((view) => view.name.toLowerCase() === newItem.toLowerCase());
+    if (isDuplicate) {
+      setMessage('Item with this name already exists', MessageType.Error);
+      return;
+    }
+
+    try {
       const data = await fetchAddItem(newItem);
       setViews([...views, { _id: data._id, name: data.name }]);
       setNewItem('');
-    } else {
-      setMessage('New item cannot be empty', MessageType.Error);
+    } catch (error) {
+      setMessage('Failed to add item. Please try again later.', MessageType.Error);
     }
   };
 
