@@ -12,11 +12,11 @@ https://mobile-wordpress-web.vercel.app/
 
 ## If you want to run the application locally, you also need to clone and run the server (repository: MobileWordpress-Server).
 
-## In the next step, you will need to create a `.env.local` file in the "src" directory:
+## In the next step, you will need to create a `.env.local`:
 
 ```
-NEXT_PUBLIC_API_VIEWS_ENDPOINT=http://localhost:9000/api/views
-NEXT_PUBLIC_API_NAVIGATION_ENDPOINT=http://localhost:9000/api/settings/navigation
-NEXT_PUBLIC_API_HEADER_ENDPOINT=http://localhost:9000/api/settings/header
+NEXT_PUBLIC_API_VIEWS_ENDPOINT=http://localhost:YOUR_PORT_NUMBER/api/views
+NEXT_PUBLIC_API_NAVIGATION_ENDPOINT=http://localhost:YOUR_PORT_NUMBER/api/settings/navigation
+NEXT_PUBLIC_API_HEADER_ENDPOINT=http://localhost:YOUR_PORT_NUMBER/api/settings/header
 ```
 
