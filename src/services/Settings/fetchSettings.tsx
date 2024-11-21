@@ -1,4 +1,4 @@
-import { FormValues } from '@/services/Settings/fetchSettings.types';
+import { NavigationObjectType } from '@/services/Settings/fetchSettings.types';
 
 const endpoint = process.env.NEXT_PUBLIC_API_NAVIGATION_ENDPOINT;
 
@@ -8,7 +8,7 @@ if (!endpoint) {
   );
 }
 
-export const fetchNavigation = async (): Promise<Array<FormValues>> => {
+export const fetchNavigation = async (): Promise<Array<NavigationObjectType>> => {
   try {
     const response = await fetch(endpoint);
     const data = await response.json();
@@ -20,7 +20,7 @@ export const fetchNavigation = async (): Promise<Array<FormValues>> => {
 };
 
 export const fetchSaveNavigation = async (
-  navigationData: Array<FormValues>
+  navigationData: Array<NavigationObjectType>
 ) => {
   const request = await fetch(endpoint, {
     method: 'PATCH',
